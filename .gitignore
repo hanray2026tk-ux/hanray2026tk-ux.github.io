@@ -1,0 +1,8 @@
+# 编辑备份与临时产物，不部署
+_edit_backups/
+*.bak-*
+*.bak
+__pycache__/
+*.pyc
+.DS_Store
+site-index.html.tmp
