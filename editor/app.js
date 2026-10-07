@@ -266,6 +266,7 @@
       location.hash = '#p=' + encodeURIComponent(pageRel);
       return;
     }
+    stopAttach();
     frame.src = 'about:blank';
     edits = []; imgEdits = []; srcInFileOf = new WeakMap(); setDirty(0);
     $('view-edit').hidden = true;
@@ -285,6 +286,7 @@
     document.title = pageNote.split('——')[0].trim() + ' · 在线编辑';
     edits = []; imgEdits = []; srcInFileOf = new WeakMap(); setDirty(0); setState(true);
     frame.src = rel;
+    startAttach();
   }
 
   function route() {
@@ -297,12 +299,36 @@
 
   /* ===================== iframe 内编辑 ===================== */
 
-  frame.addEventListener('load', function () {
+  /* iframe 的 load 事件在图片多的页面上可能很晚才触发（慢网络下可达 1 分钟），
+     只靠 load 会让用户点进来后长时间无法编辑。这里同时轮询 contentDocument，
+     一旦出现可用的文档就立刻接入（每个文档只接一次）。 */
+  var attachedDocs = new WeakSet();
+  var pollTimer = null, pollStop = null;
+
+  function stopAttach() {
+    if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+    if (pollStop) { clearTimeout(pollStop); pollStop = null; }
+  }
+
+  function tryAttach() {
     var doc;
     try { doc = frame.contentDocument; } catch (e) { doc = null; }
-    if (!doc || !doc.body) return;
+    if (!doc || !doc.body || !doc.body.children.length || attachedDocs.has(doc)) return false;
+    attachedDocs.add(doc);
     attach(doc);
-  });
+    return true;
+  }
+
+  function startAttach() {
+    stopAttach();
+    attachedDocs = new WeakSet();
+    pollTimer = setInterval(function () {
+      if (tryAttach()) { clearInterval(pollTimer); pollTimer = null; }
+    }, 150);
+    pollStop = setTimeout(function () { if (pollTimer) { clearInterval(pollTimer); pollTimer = null; } }, 45000);
+  }
+
+  frame.addEventListener('load', function () { tryAttach(); });
 
   function attach(doc) {
     function markEditable() {
@@ -566,6 +592,7 @@
     if (hasDirty() && !confirm('放弃当前所有未保存的改动？')) return;
     edits = []; imgEdits = []; srcInFileOf = new WeakMap(); setDirty(0);
     frame.src = pageRel + '?t=' + Date.now();
+    startAttach();
   });
   $('back').addEventListener('click', function (e) {
     if (hasDirty() && !confirm('还有未保存的改动，确定返回清单？')) e.preventDefault();
