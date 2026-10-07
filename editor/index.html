@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>凡是与美 · 在线编辑器</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<header id="top">
+  <div class="brand">凡是与美 · 在线编辑器</div>
+  <div class="right">
+    <span id="tok-state" class="tok off">未配置 Token</span>
+    <button id="btn-tok">设置 Token</button>
+    <a id="link-site" href="https://hanray2026tk-ux.github.io/" target="_blank">打开线上站点</a>
+  </div>
+</header>
+
+<!-- ============ 页面清单 ============ -->
+<main id="view-list">
+  <p class="hint">
+    点任意一行进入编辑：<b>文本点击即可改</b>，<b>图片点击可上传替换</b>，<b>Cmd / Ctrl + S</b> 保存到 GitHub。
+    保存后本站会在几分钟内自动重新发布。
+  </p>
+  <p class="hint">
+    每行下方备注格式：<b>导航项 › 页面标题 —— 主要内容</b>。
+    <span id="gen"></span>
+  </p>
+  <input id="q" type="search" placeholder="输入关键词筛选，例如：鼻子 / 真实自拍 / 抗衰老 / 医生团队 …" autocomplete="off">
+  <p class="hint" id="cnt"></p>
+  <ul id="list"></ul>
+</main>
+
+<!-- ============ 编辑页面 ============ -->
+<main id="view-edit" hidden>
+  <div id="frame-wrap"><iframe id="frame" title="页面预览"></iframe></div>
+  <div id="bar">
+    <span class="state" id="state">编辑中</span>
+    <span class="note" id="note"></span>
+    <a href="#/" id="back">返回清单</a>
+    <button data-a="toggle" id="btn-toggle">暂停编辑</button>
+    <button data-a="discard" id="btn-discard">放弃改动</button>
+    <button data-a="save" class="primary" id="btn-save" disabled>保存</button>
+    <span id="msg"></span>
+  </div>
+</main>
+
+<!-- ============ Token 设置 ============ -->
+<div id="modal" hidden>
+  <div class="box">
+    <h3>设置 GitHub Token</h3>
+    <p>
+      在线编辑器通过 GitHub API 把改动提交到仓库
+      <code id="repo-name"></code>，因此需要你自己的 Token。
+      Token 只保存在<b>本机浏览器</b>（localStorage），不会写入网站或仓库，也没有其他人能看到。
+    </p>
+    <ol>
+      <li>打开 <a href="https://github.com/settings/personal-access-tokens/new" target="_blank">Fine-grained token 创建页</a></li>
+      <li>Repository access 选 <b>Only select repositories</b> → 勾选 <code id="repo-name2"></code></li>
+      <li>Permissions → Repository permissions → <b>Contents: Read and write</b></li>
+      <li>生成后粘贴到下面</li>
+    </ol>
+    <input id="tok-input" type="password" placeholder="github_pat_… 或 ghp_…" autocomplete="off">
+    <div class="row">
+      <button id="tok-save" class="primary">保存并验证</button>
+      <button id="tok-clear">清除</button>
+      <button id="tok-cancel">取消</button>
+      <span id="tok-msg"></span>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

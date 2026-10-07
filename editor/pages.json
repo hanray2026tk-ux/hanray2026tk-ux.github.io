@@ -1,0 +1,565 @@
+{
+ "generated": "2026-10-07 09:45:23",
+ "pages": [
+  {
+   "rel": "/en/about-id/doctors-greeting/index.html",
+   "note": "关于凡是与美 › 医生的问候 —— 板块：Welcome to 美丽乐园！、专业成就"
+  },
+  {
+   "rel": "/en/about-id/facility-guide/index.html",
+   "note": "关于凡是与美 › 医院设施与中心 —— 板块：院内设施指南、院内实拍、凡是与美各设施的诊疗流程"
+  },
+  {
+   "rel": "/en/about-id/hospital-info/index.html",
+   "note": "关于凡是与美 › 咨询与路线 —— 板块：咨询信息、联系方式"
+  },
+  {
+   "rel": "/en/about-id/medical-staff/index.html",
+   "note": "关于凡是与美 › 医生与专家 —— 板块：明星医疗团队、按姓名或专业查找医生"
+  },
+  {
+   "rel": "/en/about-id/mission-vision/index.html",
+   "note": "关于凡是与美 › 使命与愿景 —— 板块：品牌故事"
+  },
+  {
+   "rel": "/en/anti-aging/acculift/index.html",
+   "note": "抗衰老 › AccuLift —— 板块：什么是 AccuLift？、凡是与美 AccuLift 的优势"
+  },
+  {
+   "rel": "/en/anti-aging/anti-aging-lift/index.html",
+   "note": "抗衰老 › 抗衰老升级版 —— 板块：抗衰老升级版"
+  },
+  {
+   "rel": "/en/anti-aging/fat-grafting/index.html",
+   "note": "抗衰老 › 脂肪移植 —— 板块：什么是纳米脂肪移植？、脂肪移植技术要点、抗衰老升级版"
+  },
+  {
+   "rel": "/en/anti-aging/full-facelift/index.html",
+   "note": "抗衰老 › 全面部提升 —— 板块：全脸拉皮"
+  },
+  {
+   "rel": "/en/anti-aging/index.html",
+   "note": "抗衰老 › 抗衰老治疗 —— 板块：抗衰老治疗类型"
+  },
+  {
+   "rel": "/en/anti-aging/mini-forehead-double-chin-lift/index.html",
+   "note": "抗衰老 › 容积迷你面部提升 —— 板块：容积迷你面部提升术"
+  },
+  {
+   "rel": "/en/anti-aging/minimal-incision-smas-lift/index.html",
+   "note": "抗衰老 › 微创 SMAS 提升术 —— 板块：微创 SMAS 提升术"
+  },
+  {
+   "rel": "/en/body-contouring/index.html",
+   "note": "塑形 › 身体塑形与身体雕塑 —— 板块：身体塑形手术类型"
+  },
+  {
+   "rel": "/en/body-contouring/liposuction/index.html",
+   "note": "塑形 › 吸脂 —— 板块：什么是吸脂术？、吸脂手术流程、Maximum 吸脂部位"
+  },
+  {
+   "rel": "/en/body-contouring/tummy-tuck/index.html",
+   "note": "塑形 › 腹部除皱 —— 板块：谁需要凡是与美腹壁整形？、凡是与美效果出众的原因、按需定制：迷你型 vs. 全型"
+  },
+  {
+   "rel": "/en/breast-surgery/breast-augmentation/index.html",
+   "note": "乳房手术 › 隆胸 —— 板块：隆胸手术类型、隆胸术"
+  },
+  {
+   "rel": "/en/breast-surgery/breast-correction-lift/index.html",
+   "note": "乳房手术 › 乳房提升与缩小 —— 板块：胸部矫正类型、胸部矫正"
+  },
+  {
+   "rel": "/en/breast-surgery/breast-examination-center/index.html",
+   "note": "乳房手术 › 乳房检查中心 —— 板块：比第一次更谨慎！、麦默通手术案例、乳房检查"
+  },
+  {
+   "rel": "/en/breast-surgery/breast-revision/index.html",
+   "note": "乳房手术 › 乳房修复 —— 板块：胸部修复手术、何时需要胸部修复、凡是与美在胸部修复手术方面的专业实力"
+  },
+  {
+   "rel": "/en/breast-surgery/index.html",
+   "note": "乳房手术 › 乳房手术 —— 板块：胸部手术类型"
+  },
+  {
+   "rel": "/en/community/before-after/index.html",
+   "note": "社区 · 术前术后 › 真实前后对比故事 —— 术前术后对比案例集"
+  },
+  {
+   "rel": "/en/community/event/index.html",
+   "note": "社区 · 活动优惠 › 整形外科活动与优惠 —— 活动与优惠信息"
+  },
+  {
+   "rel": "/en/community/id-blog/index.html",
+   "note": "社区 · 博客 › K-Beauty 与整形外科博客 —— K-Beauty 与整形外科博客文章"
+  },
+  {
+   "rel": "/en/community/id-with-star/index.html",
+   "note": "社区 · 明星到访 › 明星到访 —— 名人 / 明星到访与合影记录"
+  },
+  {
+   "rel": "/en/community/real-selfie/-eb88bfa7/index.html",
+   "note": "社区 · 真实自拍 › 客户 Hayan Park 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/_esc_test/index.html",
+   "note": "社区 · 真实自拍 › 客户 liushanrong 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/areum-lee-564b043b/index.html",
+   "note": "社区 · 真实自拍 › 客户 Areum Lee 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/ashley-668a89be/index.html",
+   "note": "社区 · 真实自拍 › 客户 Ashley 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/ava-98a72752/index.html",
+   "note": "社区 · 真实自拍 › 客户 Ava 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/berki-beyza-03219164/index.html",
+   "note": "社区 · 真实自拍 › 客户 Iris 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/chaeyeon-kwon-69a20dc3/index.html",
+   "note": "社区 · 真实自拍 › 客户 Chaeyeon Kwon 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/chloe-d7ac7767/index.html",
+   "note": "社区 · 真实自拍 › 客户 Chloe 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/claire-2a6007b6/index.html",
+   "note": "社区 · 真实自拍 › 客户 Claire 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/daeun-lee-dda4a370/index.html",
+   "note": "社区 · 真实自拍 › 客户 DaEun Lee 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/danielle-a27b546d/index.html",
+   "note": "社区 · 真实自拍 › 客户 Danielle 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/emily-5922ce40/index.html",
+   "note": "社区 · 真实自拍 › 客户 Emily 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/gabriel-db2bb63a/index.html",
+   "note": "社区 · 真实自拍 › 客户 Gabriel 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/geongah-yoo-06c2ca4b/index.html",
+   "note": "社区 · 真实自拍 › 客户 GeongAh Yoo 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/grace-3699b12e/index.html",
+   "note": "社区 · 真实自拍 › 客户 Grace 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/ha-sang-min-4f19dad4/index.html",
+   "note": "社区 · 真实自拍 › 客户 Ha Sang-min 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/hasung-lee-7afb1b6d/index.html",
+   "note": "社区 · 真实自拍 › 客户 HaSung Lee 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/holly-a492c333/index.html",
+   "note": "社区 · 真实自拍 › 客户 Holly 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/index.html",
+   "note": "社区 · 真实自拍 › 客户真人自拍合集 —— 按客户姓名浏览全部真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/jaehyun-lim-9d32c66d/index.html",
+   "note": "社区 · 真实自拍 › 客户 JaeHyun Lim 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/jaemin-jung-f1dbf3d2/index.html",
+   "note": "社区 · 真实自拍 › 客户 JaeMin Jung 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/jazmyn-f8ba5491/index.html",
+   "note": "社区 · 真实自拍 › 客户 Jazmyn 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/jessica-t-07f30b86/index.html",
+   "note": "社区 · 真实自拍 › 客户 Jessica T. 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/jihye-choi-73e2812f/index.html",
+   "note": "社区 · 真实自拍 › 客户 Jihye Choi 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/jiyeon-lee-326987d6/index.html",
+   "note": "社区 · 真实自拍 › 客户 Jiyeon Lee 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/jiyong-park-196e09d0/index.html",
+   "note": "社区 · 真实自拍 › 客户 Jiyong Park 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/kerime-f577b0e1/index.html",
+   "note": "社区 · 真实自拍 › 客户 Kerime 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/kiseleva-ba2aa7a2/index.html",
+   "note": "社区 · 真实自拍 › 客户 kiseleva 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/kyunghee-lee-339085b3/index.html",
+   "note": "社区 · 真实自拍 › 客户 Kyunghee Lee 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/laichichi-8389e859/index.html",
+   "note": "社区 · 真实自拍 › 客户 laichichi 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/lauren-k-e840bda8/index.html",
+   "note": "社区 · 真实自拍 › 客户 Lauren K. 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/lee-jun-8100df6f/index.html",
+   "note": "社区 · 真实自拍 › 客户 Lee Jun 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/lim-jae-hee-ab2399e0/index.html",
+   "note": "社区 · 真实自拍 › 客户 Lim Jae-hee 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/liushanrong-2b0af192/index.html",
+   "note": "社区 · 真实自拍 › 客户 liushanrong 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/liushanrong-7346e301/index.html",
+   "note": "社区 · 真实自拍 › 客户 liushanrong 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/loweiju-0afa36a9/index.html",
+   "note": "社区 · 真实自拍 › 客户 loweiju 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/marcela-f06ecb6d/index.html",
+   "note": "社区 · 真实自拍 › 客户 Marcela 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/melissa-r-1225c7ba/index.html",
+   "note": "社区 · 真实自拍 › 客户 Melissa R. 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/naliling-73efd544/index.html",
+   "note": "社区 · 真实自拍 › 客户 naliling 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/noelle-8d429cd6/index.html",
+   "note": "社区 · 真实自拍 › 客户 Noelle 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/olivia-b6f46843/index.html",
+   "note": "社区 · 真实自拍 › 客户 Olivia 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/olivia-df9c747e/index.html",
+   "note": "社区 · 真实自拍 › 客户 Olivia 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/paige-1287874d/index.html",
+   "note": "社区 · 真实自拍 › 客户 Paige 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/pengxinrui-e3464af3/index.html",
+   "note": "社区 · 真实自拍 › 客户 pengxinrui 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/seong-hee-jung-99208483/index.html",
+   "note": "社区 · 真实自拍 › 客户 Seong Hee-jung 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/seoyeon-hwang-fa839fe5/index.html",
+   "note": "社区 · 真实自拍 › 客户 SeoYeon Hwang 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/seoyoon-lim-12936ea3/index.html",
+   "note": "社区 · 真实自拍 › 客户 Seoyoon Lim 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/seunghee-shin-59ce6767/index.html",
+   "note": "社区 · 真实自拍 › 客户 SeungHee Shin 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/shim-jung-in-f5762933/index.html",
+   "note": "社区 · 真实自拍 › 客户 Shim Jung-in 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/siyeon-kim-f9c2bb06/index.html",
+   "note": "社区 · 真实自拍 › 客户 SiYeon Kim 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/sunyoung-kin-a658cf27/index.html",
+   "note": "社区 · 真实自拍 › 客户 SunYoung Kin 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/wanggongmengyan-d5b0f59a/index.html",
+   "note": "社区 · 真实自拍 › 客户 wanggongmengyan 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/wangjing-4324ec21/index.html",
+   "note": "社区 · 真实自拍 › 客户 wangjing 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/xiaoyunjing-28091c92/index.html",
+   "note": "社区 · 真实自拍 › 客户 xiaoyunjing 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/yang-sun-young-03944b02/index.html",
+   "note": "社区 · 真实自拍 › 客户 Yang Sun-young 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/yangching-8cacd1a4/index.html",
+   "note": "社区 · 真实自拍 › 客户 yangching 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/yinyeoung-bae-34ff121b/index.html",
+   "note": "社区 · 真实自拍 › 客户 YinYeoung Bae 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/yoojung-choi-db591e78/index.html",
+   "note": "社区 · 真实自拍 › 客户 Yoojung Choi 的真人自拍"
+  },
+  {
+   "rel": "/en/community/real-selfie/yuneae-lee-85eb2a2a/index.html",
+   "note": "社区 · 真实自拍 › 客户 YunEae Lee 的真人自拍"
+  },
+  {
+   "rel": "/en/community/surgery-review/index.html",
+   "note": "社区 · 术后评价 › 手术评价 —— 患者术后评价与反馈"
+  },
+  {
+   "rel": "/en/community/today-plastic-surgery/index.html",
+   "note": "社区 · 今日整形 › 真实手术案例与恢复故事 —— 每日手术实拍与恢复记录"
+  },
+  {
+   "rel": "/en/doctors/index.html",
+   "note": "医生团队 › 医生团队 —— 凡是与美医生团队 —— 由资深整形外科医生组成，覆盖眼、鼻、形体、抗衰与面部轮廓精雕，以中英文详尽呈现每位医生的资质与擅长项目。"
+  },
+  {
+   "rel": "/en/ent-nose/index.html",
+   "note": "鼻科耳鼻喉科 › 耳鼻喉鼻部手术 —— 板块：耳鼻喉科鼻部整形手术、标志性线条由凡是与美打造，引领鼻部手术潮流"
+  },
+  {
+   "rel": "/en/ent-nose/nasal-fracture-repair/index.html",
+   "note": "鼻科耳鼻喉科 › 鼻骨骨折修复 —— 板块：一站式当天完成笔直精致的鼻梁线条、一站式当日手术流程、您的鼻子是否因意外而断裂或歪斜？"
+  },
+  {
+   "rel": "/en/ent-nose/septoplasty/index.html",
+   "note": "鼻科耳鼻喉科 › 鼻中隔矫正 —— 板块：一站式当天完成笔直精致的鼻梁线条、安全的功能性鼻部整形——为何必须选择凡是与美、功能性鼻整形， 务必选择具备协同治疗能力的医院级医疗机构！"
+  },
+  {
+   "rel": "/en/eye/canthoplasty/index.html",
+   "note": "眼睛 › 眼眦整形 —— 板块：我理想中的开眼角术、开眼角术、好的术后，好的眼部！凡是与美眼部整形中心"
+  },
+  {
+   "rel": "/en/eye/double-eyelid-surgery/index.html",
+   "note": "眼睛 › 双眼皮手术 —— 板块：惊艳还是自然？、切开式双眼皮、双眼皮手术"
+  },
+  {
+   "rel": "/en/eye/double-thread-non-incision-method/index.html",
+   "note": "眼睛 › 双线 Non-切口法 —— 板块：为你的眼睛量身定制 1:1 设计！凡是与美半外双、凡是与美双眼皮埋线法（非切开式）、好的术后，好的眼部！凡是与美眼部整形中心"
+  },
+  {
+   "rel": "/en/eye/incisional-double-eyelid-method/index.html",
+   "note": "眼睛 › 切开式双眼皮手术 —— 板块：韩国双眼皮手术 Skinny 切口法的优势、双眼皮切开法、好的术后，好的眼部！凡是与美眼部整形中心"
+  },
+  {
+   "rel": "/en/eye/index.html",
+   "note": "眼睛 › 眼部手术 —— 板块：眼部手术类型、好的术后，好的眼部！凡是与美眼部整形中心"
+  },
+  {
+   "rel": "/en/eye/ptosis-correction/index.html",
+   "note": "眼睛 › 上睑下垂矫正 —— 板块：更强的固定无需担心修复手术、上睑下垂矫正术、好的术后，好的眼部！凡是与美眼部整形中心"
+  },
+  {
+   "rel": "/en/eye/revision-eyelid-surgery/index.html",
+   "note": "眼睛 › 修复性眼睑整形 —— 板块：双眼皮手术效果不自然或失败？、眼睑修复手术、好的术后，好的眼部！凡是与美眼部整形中心"
+  },
+  {
+   "rel": "/en/eye/under-eye-fat-repositioning/index.html",
+   "note": "眼睛 › 下眼睑脂肪复位 —— 板块：通过凡是与美下眼睑脂肪复位，让疲惫暗淡的双眼重焕光彩、眼底脂肪再排列、好的术后，好的眼部！凡是与美眼部整形中心"
+  },
+  {
+   "rel": "/en/face-contouring/3-type-of-facial-contouring/index.html",
+   "note": "面部轮廓 › 3 型面部轮廓整形 —— 板块：凡是与美颧骨缩小术、凡是与美方颌缩小术、凡是与美下巴缩小术"
+  },
+  {
+   "rel": "/en/face-contouring/facial-feminization-surgery/index.html",
+   "note": "面部轮廓 › 面部女性化手术 —— 板块：什么是面部女性化手术（FFS）？、谁适合韩国面部女性化手术（FFS）？、面部女性化手术（FFS）的手术流程"
+  },
+  {
+   "rel": "/en/face-contouring/forehead-implant/index.html",
+   "note": "面部轮廓 › 额头假体 —— 板块：为什么额头缩小手术也是凡是与美的专长？、360 度每个角度都美丽的额头线条、为什么选择凡是与美的双重固定额头塑形？"
+  },
+  {
+   "rel": "/en/face-contouring/high-l-cheekbone-reduction/index.html",
+   "note": "面部轮廓 › High-L 颧骨缩小术 —— 板块：凡是与美的 High-L 颧骨缩小术、凡是与美的快速颧骨缩小术、High-L颧骨缩小术"
+  },
+  {
+   "rel": "/en/face-contouring/index.html",
+   "note": "面部轮廓 › 韩国面部轮廓整形手术 —— 板块：面部轮廓整形手术类型"
+  },
+  {
+   "rel": "/en/face-contouring/mandible-reduction/index.html",
+   "note": "面部轮廓 › V 线下颌缩小 —— 板块：凡是与美 MVP 方颌缩小术、下颌角手术方法、下巴缩小手术方法"
+  },
+  {
+   "rel": "/en/face-contouring/revision-facial-contouring/index.html",
+   "note": "面部轮廓 › 修复性面部轮廓整形 —— 板块：精准面部轮廓修复手术、可靠有保障的修复手术、面部轮廓修复"
+  },
+  {
+   "rel": "/en/index.html",
+   "note": "首页 —— 站点主页：首屏 Banner / 为什么选择 / 真实评价 / 医疗团队 / 博客等"
+  },
+  {
+   "rel": "/en/inquiry/info/index.html",
+   "note": "咨询 › 联系方式 —— 联系与到院路线：地址、电话、邮箱、交通指引、营业时间"
+  },
+  {
+   "rel": "/en/male-plastic-surgery/abdominal-surgery/index.html",
+   "note": "男性整形手术 › 男性腹部手术 —— 板块：什么是 MAN 腹部 Lipofit？、为什么男性腹部肥胖需要溶脂塑形？、该不该做？完全不必担心。你就是最适合这项手术的人。"
+  },
+  {
+   "rel": "/en/male-plastic-surgery/gynecomastia-surgery/index.html",
+   "note": "男性整形手术 › 男性乳房发育症手术 —— 板块：男性乳房发育矫正术、我是不是也有男性乳房发育症？、一天完成男性乳房发育矫正，无痛"
+  },
+  {
+   "rel": "/en/male-plastic-surgery/index.html",
+   "note": "男性整形手术 › 男性整形外科 —— 板块：男性整形手术类型"
+  },
+  {
+   "rel": "/en/male-plastic-surgery/male-facial-contouring/index.html",
+   "note": "男性整形手术 › 男性面部轮廓整形 —— 板块：男性面部轮廓设计、Angle 缩小术 for men 凡是与美有何不同？、男性颧骨缩小术凡是与美有何不同？"
+  },
+  {
+   "rel": "/en/male-plastic-surgery/male-mid-age-eye-surgery/index.html",
+   "note": "男性整形手术 › 男性中年眼部手术 —— 板块：男性眼睑整形、中年-aged 男性眼睑整形"
+  },
+  {
+   "rel": "/en/male-plastic-surgery/male-orthognathic-surgery/index.html",
+   "note": "男性整形手术 › 男性正颌手术 —— 板块：男性双鄂手术、男性双鄂手术—— 凡是与美有何不同？、男性双鄂手术适合人群"
+  },
+  {
+   "rel": "/en/male-plastic-surgery/male-ptosis-correction/index.html",
+   "note": "男性整形手术 › 男性上睑下垂矫正 —— 板块：男性眼睑整形"
+  },
+  {
+   "rel": "/en/male-plastic-surgery/male-rhinoplasty/index.html",
+   "note": "男性整形手术 › 男性鼻部整形 —— 板块：功能性鼻部整形、直线角度鼻部整形、男性鼻部整形"
+  },
+  {
+   "rel": "/en/middle-age-eye/brow-lift/index.html",
+   "note": "中年眼 › 提眉手术 —— 板块：眉部提升、提眉手术的优势"
+  },
+  {
+   "rel": "/en/middle-age-eye/endotine-forehead-lift/index.html",
+   "note": "中年眼 › Endotine 额头提升 —— 板块：额头提升、Endotine 额头提升"
+  },
+  {
+   "rel": "/en/middle-age-eye/index.html",
+   "note": "中年眼 › 中年眼部手术 —— 中年眼部整形"
+  },
+  {
+   "rel": "/en/middle-age-eye/lower-blepharoplasty/index.html",
+   "note": "中年眼 › 下眼睑整形 —— 板块：微创中年眼部手术、凡是与美下眼睑成形术的优势、下眼睑整形"
+  },
+  {
+   "rel": "/en/middle-age-eye/ptosis-correction/index.html",
+   "note": "中年眼 › 上睑下垂矫正术 —— 板块：眼型矫正、凡是与美眼型矫正的类型、控制式眼型矫正"
+  },
+  {
+   "rel": "/en/middle-age-eye/under-eye-fat-repositioning/index.html",
+   "note": "中年眼 › 眼底脂肪再排列 —— 板块：什么是中年下眼睑脂肪复位？、下眼睑手术类型、中年眼袋脂肪再定位的优势"
+  },
+  {
+   "rel": "/en/middle-age-eye/upper-blepharoplasty/index.html",
+   "note": "中年眼 › 上眼睑整形 —— 板块：上眼睑整形、上眼睑手术的优势"
+  },
+  {
+   "rel": "/en/nose/alar-reduction/index.html",
+   "note": "鼻子 › 鼻翼缩小 —— 板块：在凡是与美，我们的鼻翼缩小以卓越技艺脱颖而出。、个性化深度分析、凡是与美独家技术！什么是三步鼻翼缩小术？"
+  },
+  {
+   "rel": "/en/nose/asian-rhinoplasty/index.html",
+   "note": "鼻子 › 亚洲鼻部整形 —— 板块：凡是与美的亚洲人鼻部整形有何不同？、凡是与美亚洲人鼻部整形手术技术、3 层延长术"
+  },
+  {
+   "rel": "/en/nose/index.html",
+   "note": "鼻子 › 鼻整形 —— 板块：鼻部整形的标准！凡是与美鼻部手术中心、标志性线条由凡是与美打造，引领鼻部手术潮流"
+  },
+  {
+   "rel": "/en/nose/naturally-refined-nose/index.html",
+   "note": "鼻子 › 自然精雕鼻 —— 板块：轮廓鼻整形、鼻部整形类型、标志性线条由凡是与美打造，引领鼻部手术潮流"
+  },
+  {
+   "rel": "/en/nose/no-implant-nose/index.html",
+   "note": "鼻子 › 无假体鼻部整形 —— 板块：因为我们的手术技艺出类拔萃、自体肋软骨鼻整形，原理如下、微创切口快速采集肋软骨！"
+  },
+  {
+   "rel": "/en/nose/revision-rhinoplasty/index.html",
+   "note": "鼻子 › 鼻部修复 —— 板块：凡是与美鼻部修复整形、鼻部整形类型、鼻部修复整形"
+  },
+  {
+   "rel": "/en/online-consultation/index.html",
+   "note": "咨询 › 在线咨询 —— 在线咨询：上传照片、填写信息、提交整形 / 皮肤 / 牙科咨询"
+  },
+  {
+   "rel": "/en/online-consultation/write/index.html",
+   "note": "咨询 › 在线咨询 - 填写 —— 在线咨询表单：填写姓名与联系方式并提交咨询"
+  },
+  {
+   "rel": "/en/orthognathic-surgery/index.html",
+   "note": "正颌手术 › 正颌手术 —— 板块：颌面手术类型"
+  },
+  {
+   "rel": "/en/orthognathic-surgery/mouth-protrusion-surgery/index.html",
+   "note": "正颌手术 › 凸嘴手术 —— 板块：Bimaxillary 前突手术、突嘴矫正手术的类型"
+  },
+  {
+   "rel": "/en/orthognathic-surgery/no-tie-orthognathic-surgery/index.html",
+   "note": "正颌手术 › 免结扎双颌手术 —— 板块：免结扎双颌手术、颌骨固定对安全是必要的吗？"
+  },
+  {
+   "rel": "/en/orthognathic-surgery/orthognathic-surgery-revision/index.html",
+   "note": "正颌手术 › 修复性正颌手术 —— 板块：颌面修复手术的挑战、颌面修复手术"
+  },
+  {
+   "rel": "/en/orthognathic-surgery/surgery-first-approach/index.html",
+   "note": "正颌手术 › 手术优先正颌手术 —— 板块：什么是手术优先正颌手术？、手术优先正颌手术的优势、先手术疗法，恢复更快"
+  },
+  {
+   "rel": "/en/orthognathic-surgery/three-jaw-surgery/index.html",
+   "note": "正颌手术 › 三颌手术 —— 板块：什么是三颌手术？、双颌前突三颌手术"
+  },
+  {
+   "rel": "/en/plastic-surgery/index.html",
+   "note": "整形外科 › 韩国整形外科 —— 板块：面部轮廓、鼻部整形、耳鼻喉·鼻部整形"
+  },
+  {
+   "rel": "/en/price-inquiries/index.html",
+   "note": "咨询 › 整形手术价格咨询 —— 整形手术价格咨询：常见问题"
+  },
+  {
+   "rel": "/en/protection-policy/index.html",
+   "note": "页脚 › 隐私政策 —— 板块：第一条收集的数据类型及收集方式、第二条数据收集与使用目的、第三条个人数据的保存与销毁"
+  },
+  {
+   "rel": "/en/sitemap/index.html",
+   "note": "页脚 › 凡是与美网站地图 —— 网站地图：全站栏目与页面索引"
+  },
+  {
+   "rel": "/index.html",
+   "note": "站点入口 —— 打开后自动跳转到 /en/ 首页"
+  }
+ ]
+}

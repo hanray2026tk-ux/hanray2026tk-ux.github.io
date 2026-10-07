@@ -1,0 +1,194 @@
+:root {
+  --pink: #ee388b;
+  --pink-dark: #d92b7c;
+  --ink: #1c1e24;
+  --line: #e6e6e6;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font: 14px/1.7 -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: var(--ink);
+  background: #fafafa;
+}
+
+/* ---------------- 顶栏 ---------------- */
+#top {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  z-index: 10;
+}
+
+#top .brand { font-weight: 700; letter-spacing: .02em; }
+#top .right { display: flex; align-items: center; gap: 10px; }
+#top a { color: var(--pink); text-decoration: none; font-size: 13px; }
+#top a:hover { text-decoration: underline; }
+
+#top button {
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+#top button:hover { background: #f4f4f4; }
+
+.tok { font-size: 12px; padding: 4px 9px; border-radius: 999px; }
+.tok.off { background: #fdeaea; color: #b42318; }
+.tok.on { background: #e8f6ec; color: #067647; }
+
+/* ---------------- 清单 ---------------- */
+#view-list {
+  padding: 74px 22px 60px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+#view-list .hint { color: #666; margin: 0 0 10px; }
+#view-list .hint b { color: var(--ink); }
+#view-list code,
+#modal code {
+  background: #eee;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+#q {
+  width: 100%;
+  max-width: 660px;
+  padding: 11px 14px;
+  font-size: 14px;
+  border: 1px solid #d5d5d5;
+  border-radius: 10px;
+  margin: 6px 0 8px;
+  background: #fff;
+}
+#q:focus { outline: 2px solid rgba(238, 56, 139, .35); border-color: var(--pink); }
+
+#cnt { color: #888; font-size: 12.5px; }
+
+#list { list-style: none; padding: 0; margin: 10px 0 0; }
+#list li { padding: 9px 0; border-bottom: 1px solid #efefef; }
+#list a { color: #0a66c2; text-decoration: none; font-size: 13px; }
+#list a:hover { text-decoration: underline; }
+#list .note { display: block; color: #333; margin-top: 2px; }
+
+/* ---------------- 编辑视图 ---------------- */
+#view-edit { position: fixed; inset: 0; }
+
+#frame-wrap {
+  position: absolute;
+  inset: 0 0 56px 0;
+  background: #fff;
+}
+
+#frame { width: 100%; height: 100%; border: 0; display: block; }
+
+#bar {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  background: rgba(24, 26, 32, .96);
+  color: #fff;
+  font-size: 13px;
+}
+
+#bar .state { font-weight: 600; }
+#bar .state.off { color: #ffb4b4; }
+#bar .note {
+  flex: 1;
+  min-width: 0;
+  color: #e7e9ee;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#bar a { color: #9fd0ff; text-decoration: none; }
+#bar a:hover { text-decoration: underline; }
+
+#bar button {
+  font: inherit;
+  color: #fff;
+  background: rgba(255, 255, 255, .14);
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 8px;
+  padding: 7px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+#bar button:hover { background: rgba(255, 255, 255, .26); }
+#bar button.primary { background: var(--pink); border-color: var(--pink); }
+#bar button.primary:hover { background: var(--pink-dark); }
+#bar button:disabled { opacity: .45; cursor: default; }
+
+#msg {
+  max-width: 360px;
+  color: #cfd3da;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------------- 弹层 ---------------- */
+#modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+}
+#modal[hidden] { display: none; }
+#modal .box {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px 24px;
+  max-width: 620px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .3);
+}
+#modal h3 { margin: 0 0 10px; font-size: 17px; }
+#modal p, #modal ol { color: #444; font-size: 13px; }
+#modal ol { padding-left: 20px; }
+#modal input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 13px;
+  border: 1px solid #d5d5d5;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+#modal .row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+#modal button {
+  font: inherit;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+#modal button.primary { background: var(--pink); border-color: var(--pink); color: #fff; }
+#modal button.primary:hover { background: var(--pink-dark); }
+#tok-msg { font-size: 12.5px; color: #666; }
