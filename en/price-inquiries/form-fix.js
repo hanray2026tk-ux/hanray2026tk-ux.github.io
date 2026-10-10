@@ -36,7 +36,14 @@
     + '.surg-panel.fx-hidden{display:none}'
     + '.surg-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}'
     + '.surg-chip{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:100px;background:#f2f2f2;color:#333;font-size:13px}'
-    + '.surg-chip .sx{cursor:pointer;color:#888;font-weight:700}';
+    + '.surg-chip .sx{cursor:pointer;color:#888;font-weight:700}'
+    + '.fx-checked{background-color:#000f24;border-color:#000f24;color:#fff;align-items:center}'
+    + '.fx-modal-mask{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;display:flex;align-items:center;justify-content:center;padding:16px}'
+    + '.fx-modal{background:#fff;border-radius:12px;max-width:420px;width:100%;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.25)}'
+    + '.fx-modal-title{font-size:18px;font-weight:700;color:#1c1c1c;margin-bottom:8px}'
+    + '.fx-modal-body{font-size:15px;color:#444;line-height:1.7;margin-bottom:20px}'
+    + '.fx-modal-btn{display:block;width:100%;height:48px;border-radius:8px;background:#003984;color:#fff;font-size:16px;font-weight:600;border:0;cursor:pointer}'
+    + '.fx-modal-btn:hover{opacity:.92}';
   var st = document.createElement('style');
   st.textContent = css;
   document.head.appendChild(st);
@@ -237,6 +244,72 @@
     });
     document.addEventListener('click', function(){ closePanel(); });
     panel.addEventListener('click', function(e){ e.stopPropagation(); });
+  })();
+
+  /* ---------- 同意条款复选框 ---------- */
+  (function(){
+    var cb = document.querySelector('[role="checkbox"]');
+    if(!cb) return;
+    var CHECK = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>';
+    function setChecked(on){
+      cb.setAttribute('aria-checked', on ? 'true' : 'false');
+      cb.setAttribute('data-state', on ? 'checked' : 'unchecked');
+      if(on){
+        cb.classList.add('fx-checked');
+        if(!cb.querySelector('svg')) cb.insertAdjacentHTML('beforeend', CHECK);
+      } else {
+        cb.classList.remove('fx-checked');
+        var sv = cb.querySelector('svg'); if(sv) sv.remove();
+      }
+    }
+    function toggle(){ setChecked(cb.getAttribute('aria-checked') !== 'true'); }
+    cb.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); toggle(); });
+    var lbl = document.getElementById(cb.getAttribute('aria-labelledby'));
+    if(lbl){
+      lbl.addEventListener('click', function(e){
+        if(e.target.closest && e.target.closest('a')) return; /* 政策链接不切换勾选 */
+        e.preventDefault(); toggle();
+      });
+    }
+  })();
+
+  /* ---------- 立即提交 ---------- */
+  (function(){
+    var submitBtn = null, all = document.querySelectorAll('button');
+    for(var i=0;i<all.length;i++){ if(all[i].textContent.trim()==='立即提交'){ submitBtn = all[i]; break; } }
+    if(!submitBtn) return;
+    var nameInput = document.querySelector('input[placeholder="Enter your name"]');
+    var rfsBtn = document.getElementById('rfs-btn');
+    var cb = document.querySelector('[role="checkbox"]');
+
+    function showModal(title, bodyHtml, okText){
+      var mask = mk('div','fx-modal-mask');
+      var box = mk('div','fx-modal');
+      box.innerHTML = '<div class="fx-modal-title"></div><div class="fx-modal-body"></div>';
+      box.querySelector('.fx-modal-title').textContent = title;
+      box.querySelector('.fx-modal-body').innerHTML = bodyHtml;
+      var act = mk('div');
+      var ok = mk('button','fx-modal-btn'); ok.type='button'; ok.textContent = okText || 'OK';
+      ok.addEventListener('click', function(){ mask.remove(); });
+      act.appendChild(ok); box.appendChild(act);
+      mask.appendChild(box);
+      mask.addEventListener('click', function(e){ if(e.target===mask) mask.remove(); });
+      document.body.appendChild(mask);
+      ok.focus();
+    }
+
+    submitBtn.addEventListener('click', function(e){
+      e.preventDefault();
+      var errs = [];
+      if(!nameInput || !nameInput.value.trim()) errs.push('请输入姓名（Name）');
+      if(!rfsBtn || !rfsBtn.getAttribute('data-value')) errs.push('请选择国籍（Nationality）');
+      if(!cb || cb.getAttribute('aria-checked') !== 'true') errs.push('请勾选「同意收集和使用个人信息」');
+      if(errs.length){
+        showModal('Please check your input', errs.join('<br>'), 'OK');
+        return;
+      }
+      showModal('提示', '本站为静态站点，尚未接入表单提交后台，您的咨询还没有真正发送出去。', '确定');
+    });
   })();
 
 })();
