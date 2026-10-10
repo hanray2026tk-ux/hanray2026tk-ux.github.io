@@ -72,7 +72,7 @@
     var bg = p.r ? ' bg-idh-gray-050' : '';
     var icons = (p.p ? icon('ico-lock') : '') + (p.r ? icon('ico-reply') : '');
     var cat = CATLABEL[p.c] || p.c;
-    return '<tr class="transition-colors border-b border-solid border-idh-gray-200 last:border-b-[1px]' + bg + '">' +
+    return '<tr data-fix="1" class="transition-colors border-b border-solid border-idh-gray-200 last:border-b-[1px]' + bg + '">' +
       '<td class="' + TD + '">' + p.n + '</td>' +
       '<td class="' + TD + '"><span class="inline-flex items-center justify-center text-wht font-medium whitespace-nowrap h-[32px] min-h-[32px] px-3 text-xs rounded-[8px] bg-idh-secondary-01">' + esc(cat) + '</span></td>' +
       '<td class="' + TD + '"><button type="button" class="flex min-w-0 items-center gap-2 cursor-pointer w-full text-left">' + icons + '<span class="min-w-0 line-clamp-1 body3 text-idh-gray-900">' + esc(p.t) + '</span></button></td>' +
@@ -97,7 +97,7 @@
       : 'flex min-h-[500px] flex-col items-center justify-center bg-idh-gray-050 px-4 py-12 md:py-16';
     var inner = '<div class="' + wrapCls + '"><svg aria-hidden="true" class="inline-block shrink-0 leading-none mb-[12px] text-idh-gray-050" style="width:80px;height:80px"><use href="' + SPRITE + '#ico-nodata"></use></svg><p class="caption2 mt-[12px] text-center text-idh-gray-600">暂无帖子</p></div>';
     if (kind === 'mobile') return inner;
-    return '<tr class="transition-colors border-0 hover:bg-transparent"><td class="[&:has([role=checkbox])]:pr-0 h-auto border-b border-solid border-idh-gray-200 p-0 align-middle bg-wht" colspan="5">' + inner + '</td></tr>';
+    return '<tr data-fix="1" class="transition-colors border-0 hover:bg-transparent"><td class="[&:has([role=checkbox])]:pr-0 h-auto border-b border-solid border-idh-gray-200 p-0 align-middle bg-wht" colspan="5">' + inner + '</td></tr>';
   }
 
   var state = { cat: 'all', page: 1 };
@@ -107,11 +107,28 @@
     return POSTS.filter(function (p) { return p.c === state.cat; });
   }
 
-  /* ---------- tabs ---------- */
-  var tablist = document.querySelector('[role="tablist"]');
+  /* ---------- element lookup ---------- */
+  /* React 水合可能替换/重建节点，所有查询都实时进行 */
+  var tablist = null, table = null, tbody = null, mobileWrap = null;
 
+  function q() {
+    tablist = document.querySelector('[role="tablist"]');
+    table = document.querySelector('table');
+    tbody = table ? table.querySelector('tbody') : null;
+    mobileWrap = null;
+    var divs = document.querySelectorAll('div');
+    for (var i = 0; i < divs.length; i++) {
+      if (divs[i].classList.contains('md:hidden') && divs[i].classList.contains('block')) {
+        mobileWrap = divs[i];
+        break;
+      }
+    }
+  }
+
+  /* ---------- tabs ---------- */
   function buildTabs() {
     if (!tablist) return;
+    if (tablist.querySelectorAll('button[role="tab"]').length === CATS.length) return;
     var proto = tablist.querySelector('button[role="tab"]');
     var cls = proto ? proto.getAttribute('class') : '';
     var frag = document.createDocumentFragment();
@@ -158,30 +175,17 @@
   }
 
   /* ---------- table / cards / pagination ---------- */
-  var table = document.querySelector('table');
-  var tbody = table ? table.querySelector('tbody') : null;
-
-  var mobileWrap = null;
-  (function findMobile() {
-    var divs = document.querySelectorAll('div');
-    for (var i = 0; i < divs.length; i++) {
-      if (divs[i].classList.contains('md:hidden') && divs[i].classList.contains('block')) {
-        mobileWrap = divs[i];
-        break;
-      }
-    }
-  })();
-
   var pagi = document.createElement('nav');
   pagi.setAttribute('role', 'navigation');
   pagi.setAttribute('aria-label', 'pagination');
   pagi.className = 'pagination-fix mt-[24px] mx-auto flex w-full justify-center';
 
-  (function placePagi() {
+  function ensurePagi() {
+    if (pagi.parentNode && document.body.contains(pagi)) return;
     var write = document.querySelector('a[href="/en/online-consultation/write"]');
     var host = write && write.parentElement ? write.parentElement : null;
     if (host && host.parentElement) host.parentElement.insertBefore(pagi, host);
-  })();
+  }
 
   var ARROW = {
     prev: '../../en/icons/ico-gray-arrow-left.svg',
@@ -226,6 +230,7 @@
   }
 
   function render() {
+    if (!tbody || !document.body.contains(tbody) || !document.body.contains(tablist)) q();
     var list = filtered();
     var totalPages = Math.max(1, Math.ceil(list.length / PER_PAGE));
     if (state.page > totalPages) state.page = totalPages;
@@ -238,18 +243,54 @@
     }
     if (mobileWrap) {
       if (pageItems.length === 0) {
-        mobileWrap.innerHTML = '<div class="w-full">' + emptyHTML('mobile') + '</div>';
+        mobileWrap.innerHTML = '<div class="w-full" data-fix="1">' + emptyHTML('mobile') + '</div>';
       } else {
-        mobileWrap.innerHTML = '<div class="w-full"><div class="flex flex-col border-t border-solid border-idh-gray-900 gap-3">' + pageItems.map(cardHTML).join('') + '</div></div>';
+        mobileWrap.innerHTML = '<div class="w-full" data-fix="1"><div class="flex flex-col border-t border-solid border-idh-gray-900 gap-3">' + pageItems.map(cardHTML).join('') + '</div></div>';
       }
     }
     renderPagination(totalPages);
   }
 
-  function init() {
+  var applying = false;
+
+  /* React 水合失败时会把标签/列表重置为空态，这里检测并自动复原 */
+  function needsFix() {
+    q();
+    if (!tablist || tablist.querySelectorAll('button[role="tab"]').length !== CATS.length) return true;
+    if (!document.body.contains(pagi)) return true;
+    if (!tbody || !tbody.querySelector('[data-fix]')) return true;
+    if (!mobileWrap || !mobileWrap.querySelector('[data-fix]')) return true;
+    return false;
+  }
+
+  function apply() {
+    if (applying) return;
+    applying = true;
+    q();
+    ensurePagi();
     buildTabs();
     render();
     updateScrollable();
+    applying = false;
+  }
+
+  var scheduled = false;
+  function observe() {
+    if (typeof MutationObserver === 'undefined') return;
+    var obs = new MutationObserver(function () {
+      if (applying || scheduled) return;
+      scheduled = true;
+      requestAnimationFrame(function () {
+        scheduled = false;
+        if (needsFix()) apply();
+      });
+    });
+    obs.observe(document.body, { childList: true, subtree: true });
+  }
+
+  function init() {
+    apply();
+    observe();
   }
 
   if (document.readyState === 'loading') {
