@@ -2,6 +2,8 @@
 /* FANSHI price-inquiry form interactions (native fallback) */
 (function () {
   'use strict';
+  /* ===== Web3Forms 配置：把 access key 填在这里即可真正接收咨询（https://web3forms.com 免费获取） ===== */
+  var WEB3FORMS_KEY = ''; /* 例如：'a1b2c3d4-e5f6-7890-abcd-ef1234567890' */
   var COUNTRIES = {"AF": "Afghanistan", "AX": "Åland Islands", "AL": "Albania", "DZ": "Algeria", "AS": "American Samoa", "AD": "Andorra", "AO": "Angola", "AI": "Anguilla", "AG": "Antigua and Barbuda", "AR": "Argentina", "AM": "Armenia", "AW": "Aruba", "AU": "Australia", "AT": "Austria", "AZ": "Azerbaijan", "BS": "Bahamas", "BH": "Bahrain", "BD": "Bangladesh", "BB": "Barbados", "BY": "Belarus", "BE": "Belgium", "BZ": "Belize", "BJ": "Benin", "BM": "Bermuda", "BT": "Bhutan", "BO": "Bolivia, Plurinational State of", "BA": "Bosnia and Herzegovina", "BW": "Botswana", "BR": "Brazil", "IO": "British Indian Ocean Territory", "BG": "Bulgaria", "BF": "Burkina Faso", "BI": "Burundi", "KH": "Cambodia", "CM": "Cameroon", "CA": "Canada", "CV": "Cape Verde", "KY": "Cayman Islands", "CF": "Central African Republic", "TD": "Chad", "CL": "Chile", "CN": "China", "CO": "Colombia", "KM": "Comoros", "CG": "Congo", "CD": "Democratic Republic of the Congo", "CK": "Cook Islands", "CR": "Costa Rica", "CI": "Côte d'Ivoire", "HR": "Croatia", "CU": "Cuba", "CW": "Curaçao", "CY": "Cyprus", "CZ": "Czech Republic", "DK": "Denmark", "DJ": "Djibouti", "DM": "Dominica", "DO": "Dominican Republic", "EC": "Ecuador", "EG": "Egypt", "SV": "El Salvador", "GQ": "Equatorial Guinea", "ER": "Eritrea", "EE": "Estonia", "ET": "Ethiopia", "FK": "Falkland Islands (Malvinas)", "FO": "Faroe Islands", "FJ": "Fiji", "FI": "Finland", "FR": "France", "PF": "French Polynesia", "GA": "Gabon", "GM": "Gambia", "GE": "Georgia", "DE": "Germany", "GH": "Ghana", "GI": "Gibraltar", "GR": "Greece", "GL": "Greenland", "GD": "Grenada", "GU": "Guam", "GT": "Guatemala", "GG": "Guernsey", "GN": "Guinea", "GW": "Guinea-Bissau", "HT": "Haiti", "HN": "Honduras", "HK": "Hong Kong", "HU": "Hungary", "IS": "Iceland", "IN": "India", "ID": "Indonesia", "IR": "Iran, Islamic Republic of", "IQ": "Iraq", "IE": "Ireland", "IM": "Isle of Man", "IL": "Israel", "IT": "Italy", "JM": "Jamaica", "JP": "Japan", "JE": "Jersey", "JO": "Jordan", "KZ": "Kazakhstan", "KE": "Kenya", "KI": "Kiribati", "XK": "Kosovo", "KW": "Kuwait", "KG": "Kyrgyzstan", "LA": "Lao People's Democratic Republic", "LV": "Latvia", "LB": "Lebanon", "LS": "Lesotho", "LR": "Liberia", "LY": "Libya", "LI": "Liechtenstein", "LT": "Lithuania", "LU": "Luxembourg", "MO": "Macao", "MK": "Republic of Macedonia", "MG": "Madagascar", "MW": "Malawi", "MY": "Malaysia", "MV": "Maldives", "ML": "Mali", "MT": "Malta", "MH": "Marshall Islands", "MQ": "Martinique", "MR": "Mauritania", "MU": "Mauritius", "MX": "Mexico", "FM": "Micronesia, Federated States of", "MD": "Republic of Moldova", "MC": "Monaco", "MN": "Mongolia", "ME": "Montenegro", "MS": "Montserrat", "MA": "Morocco", "MZ": "Mozambique", "MM": "Myanmar", "NA": "Namibia", "NR": "Nauru", "NP": "Nepal", "NL": "Netherlands", "NZ": "New Zealand", "NI": "Nicaragua", "NE": "Niger", "NG": "Nigeria", "NU": "Niue", "NF": "Norfolk Island", "KP": "North Korea", "MP": "Northern Mariana Islands", "NO": "Norway", "OM": "Oman", "PK": "Pakistan", "PW": "Palau", "PS": "Palestinian Territory", "PA": "Panama", "PG": "Papua New Guinea", "PY": "Paraguay", "PE": "Peru", "PH": "Philippines", "PN": "Pitcairn", "PL": "Poland", "PT": "Portugal", "PR": "Puerto Rico", "QA": "Qatar", "RO": "Romania", "RU": "Russia", "RW": "Rwanda", "KN": "Saint Kitts and Nevis", "LC": "Saint Lucia", "WS": "Samoa", "SM": "San Marino", "ST": "Sao Tome and Principe", "SA": "Saudi Arabia", "SN": "Senegal", "RS": "Serbia", "SC": "Seychelles", "SL": "Sierra Leone", "SG": "Singapore", "SX": "Sint Maarten", "SK": "Slovakia", "SI": "Slovenia", "SB": "Solomon Islands", "SO": "Somalia", "ZA": "South Africa", "KR": "South Korea", "SS": "South Sudan", "ES": "Spain", "LK": "Sri Lanka", "SD": "Sudan", "SR": "Suriname", "SZ": "Swaziland", "SE": "Sweden", "CH": "Switzerland", "SY": "Syria", "TW": "Taiwan", "TJ": "Tajikistan", "TZ": "Tanzania", "TH": "Thailand", "TL": "Timor-Leste", "TG": "Togo", "TK": "Tokelau", "TO": "Tonga", "TT": "Trinidad and Tobago", "TN": "Tunisia", "TR": "Turkey", "TM": "Turkmenistan", "TC": "Turks and Caicos Islands", "TV": "Tuvalu", "UG": "Uganda", "UA": "Ukraine", "AE": "United Arab Emirates", "GB": "United Kingdom", "US": "United States", "UY": "Uruguay", "UZ": "Uzbekistan", "VU": "Vanuatu", "VE": "Venezuela, Bolivarian Republic of", "VN": "Viet Nam", "VI": "Virgin Islands", "YE": "Yemen", "ZM": "Zambia", "ZW": "Zimbabwe"};
   var SURG1 = [
     {label:"Plastic Surgery", value:"plastic-surgery"},
@@ -199,6 +201,7 @@
     }
     function renderChips(){
       chips.innerHTML='';
+      chips.setAttribute('data-codes', picked.map(function(p){ return p.value; }).join(','));
       picked.forEach(function(p){
         var c = mk('span','surg-chip');
         c.innerHTML = '<span>'+p.label+'</span>';
@@ -278,9 +281,45 @@
     var submitBtn = null, all = document.querySelectorAll('button');
     for(var i=0;i<all.length;i++){ if(all[i].textContent.trim()==='立即提交'){ submitBtn = all[i]; break; } }
     if(!submitBtn) return;
-    var nameInput = document.querySelector('input[placeholder="Enter your name"]');
     var rfsBtn = document.getElementById('rfs-btn');
     var cb = document.querySelector('[role="checkbox"]');
+
+    function fieldByLabel(text){
+      var labels = document.querySelectorAll('[data-slot="field-label"]');
+      for(var i=0;i<labels.length;i++){
+        if(labels[i].textContent.trim().indexOf(text)===0) return labels[i].closest('[data-slot="field"]');
+      }
+      return null;
+    }
+    function radioVal(field){
+      var b = field && field.querySelector('button[role="radio"][aria-checked="true"]');
+      return b ? b.getAttribute('value') : null;
+    }
+    var MT = { app:'whatsapp', kakao:'kakao', line:'line', others:'others' };
+    function collect(){
+      var nameEl = document.getElementById('field-name');
+      var phoneEl = document.querySelector('input[placeholder="Please enter country code"]');
+      var emailEl = document.querySelector('#fx-email-field input');
+      var midEl = document.querySelector('#fx-messengerid-field input');
+      var msgEl = document.querySelector('textarea[placeholder="Enter your message"]');
+      var chips = document.querySelector('.surg-chips');
+      var natCode = rfsBtn ? rfsBtn.getAttribute('data-value') : '';
+      var cm = getVal(contactG1), mt = getVal(contactG2);
+      return {
+        name: nameEl ? nameEl.value.trim() : '',
+        nationality_code: natCode || '',
+        nationality: natCode ? (COUNTRIES[natCode] || natCode) : '',
+        contact_method: cm || '',
+        messenger_type: (cm==='messenger' && mt) ? (MT[mt] || mt) : '',
+        messenger_id: (midEl && midEl.value.trim()) || '',
+        phone: (phoneEl && phoneEl.value.trim()) || '',
+        email: (emailEl && emailEl.value.trim()) || '',
+        picture_status: radioVal(fieldByLabel('能否提供您的照片')) || '',
+        age_range: radioVal(fieldByLabel('年龄')) || '',
+        surgery_codes: chips ? (chips.getAttribute('data-codes') || '') : '',
+        message: msgEl ? msgEl.value.trim() : ''
+      };
+    }
 
     function showModal(title, bodyHtml, okText){
       var mask = mk('div','fx-modal-mask');
@@ -298,17 +337,60 @@
       ok.focus();
     }
 
+    function setBusy(on){
+      submitBtn.disabled = !!on;
+      submitBtn.style.opacity = on ? '.6' : '';
+      submitBtn.textContent = on ? '提交中...' : '立即提交';
+    }
+
     submitBtn.addEventListener('click', function(e){
       e.preventDefault();
+      var d = collect();
       var errs = [];
-      if(!nameInput || !nameInput.value.trim()) errs.push('请输入姓名（Name）');
-      if(!rfsBtn || !rfsBtn.getAttribute('data-value')) errs.push('请选择国籍（Nationality）');
+      if(!d.name) errs.push('请输入姓名（Name）');
+      if(!d.nationality_code) errs.push('请选择国籍（Nationality）');
       if(!cb || cb.getAttribute('aria-checked') !== 'true') errs.push('请勾选「同意收集和使用个人信息」');
       if(errs.length){
         showModal('Please check your input', errs.join('<br>'), 'OK');
         return;
       }
-      showModal('提示', '本站为静态站点，尚未接入表单提交后台，您的咨询还没有真正发送出去。', '确定');
+      if(!WEB3FORMS_KEY){
+        showModal('提示', '本站为静态站点，尚未接入表单提交后台，您的咨询还没有真正发送出去。', '确定');
+        return;
+      }
+      setBusy(true);
+      var payload = {
+        access_key: WEB3FORMS_KEY,
+        subject: 'Price Inquiry - ' + d.name,
+        from_name: 'FANSHI Website',
+        name: d.name,
+        nationality: d.nationality + (d.nationality_code ? ' (' + d.nationality_code + ')' : ''),
+        contact_method: d.contact_method,
+        messenger_type: d.messenger_type,
+        messenger_id: d.messenger_id,
+        phone: d.phone,
+        email: d.email,
+        age_range: d.age_range,
+        picture_status: d.picture_status,
+        surgery_codes: d.surgery_codes,
+        message: d.message,
+        privacy_agreed: true
+      };
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(function(r){ return r.json(); }).then(function(res){
+        setBusy(false);
+        if(res && res.success){
+          showModal('提交成功', '您的咨询已发送成功，我们会尽快与您联系。<br>Your inquiry has been successfully submitted.', '确定');
+        } else {
+          showModal('提交失败', (res && res.message) ? res.message : '抱歉，提交失败，请稍后再试。', 'OK');
+        }
+      }).catch(function(){
+        setBusy(false);
+        showModal('提交失败', '网络异常，请检查网络后重试。', 'OK');
+      });
     });
   })();
 
