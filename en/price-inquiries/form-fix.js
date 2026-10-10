@@ -358,6 +358,16 @@
         showModal('提示', '本站为静态站点，尚未接入表单提交后台，您的咨询还没有真正发送出去。', '确定');
         return;
       }
+      /* hCaptcha 垃圾防护：后台开启后，必须把验证令牌一并提交 */
+      var captchaEl = document.querySelector('.h-captcha[data-captcha="true"]');
+      var captchaToken = '';
+      if(captchaEl && window.hcaptcha && window.hcaptcha.getResponse){
+        captchaToken = window.hcaptcha.getResponse() || '';
+        if(!captchaToken){
+          showModal('请完成人机验证', '请先完成下方的「人机验证 / I\'m not a robot」，然后再点击提交。', 'OK');
+          return;
+        }
+      }
       setBusy(true);
       var payload = {
         access_key: WEB3FORMS_KEY,
@@ -376,6 +386,7 @@
         message: d.message,
         privacy_agreed: true
       };
+      if(captchaToken) payload['h-captcha-response'] = captchaToken;
       fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
