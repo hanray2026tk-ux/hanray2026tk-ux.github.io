@@ -51,4 +51,4 @@ function apply(){var boxes=document.querySelectorAll('[role="checkbox"]');for(va
 var busy=false;
 function init(){apply();if(typeof MutationObserver==="undefined")return;var obs=new MutationObserver(function(){if(busy)return;busy=true;requestAnimationFrame(function(){busy=false;apply();});});obs.observe(document.body,{childList:true,subtree:true});}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
-})();</script></body></html>
+})();</script><script src="fs-hero-book.js?v=20261011a" defer></script></body></html>
