@@ -32,27 +32,42 @@
     privacy: 'Please agree to the collection and use of personal information.',
     fail: 'Submission failed. Please try again.',
     ok: 'Your inquiry has been received. Our team will contact you shortly via your messenger.',
-    captcha: 'Please complete the human verification ("I am human") before submitting.'
+    captcha: 'Human verification failed. Please try again.'
   };
 
   var CAPTCHA_SELECTOR = '.h-captcha[data-captcha="true"]';
 
   function txt(el) { return (el ? el.textContent : '').replace(/\s+/g, ' ').trim(); }
 
-  /* 读取 hCaptcha 令牌：Web3Forms 开启垃圾防护后，提交必须携带该令牌 */
-  function readCaptcha() {
-    var el = document.querySelector(CAPTCHA_SELECTOR);
-    if (!el) return { present: false, token: '' };
-    var token = '';
+  /* 读取 hCaptcha 令牌：Web3Forms 开启垃圾防护后，提交必须携带该令牌。
+     验证框已改为 invisible（不可见）模式，不再常驻遮挡首屏 banner。 */
+  function readToken() {
     if (window.hcaptcha && typeof window.hcaptcha.getResponse === 'function') {
-      try { token = window.hcaptcha.getResponse() || ''; } catch (e) { token = ''; }
+      try { var t = window.hcaptcha.getResponse(); if (t) return t; } catch (e) { /* ignore */ }
     }
-    return { present: true, token: token };
+    var hidden = document.querySelector('textarea[name="h-captcha-response"], input[name="h-captcha-response"]');
+    return hidden && hidden.value ? hidden.value : '';
   }
 
-  function focusCaptcha() {
+  /* invisible 模式没有可点击的勾选框，需在提交时主动调用 hcaptcha.execute() 取令牌；
+     若风控判定需要挑战，只会临时弹出一次验证浮层，完成后即消失，不会永久遮住页面。 */
+  function ensureToken(cb) {
     var el = document.querySelector(CAPTCHA_SELECTOR);
-    if (el && el.scrollIntoView) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (!el || !window.hcaptcha) { cb(''); return; }
+    var cur = readToken();
+    if (cur) { cb(cur); return; }
+    var p;
+    try { p = window.hcaptcha.execute(null, { async: true }); } catch (e) { p = null; }
+    if (p && typeof p.then === 'function') {
+      p.then(function (d) { cb((d && d.response) || readToken() || ''); })
+        .catch(function () { cb(readToken() || ''); });
+      return;
+    }
+    var n = 0, iv = setInterval(function () {
+      n++;
+      var t = readToken();
+      if (t || n >= 40) { clearInterval(iv); cb(t || ''); }
+    }, 150);
   }
 
   /* 找到按钮所属的预约表单区域（含 Name 输入框的最近祖先） */
@@ -201,30 +216,32 @@
 
     if (msg) { showModal('Please check your input', msg, 'OK', false); return; }
 
-    /* hCaptcha 垃圾防护：令牌缺失时先提示完成人机验证，不发出请求 */
-    var cap = readCaptcha();
-    if (cap.present && !cap.token) {
-      focusCaptcha();
-      showModal('Verification required', MSG.captcha, 'OK', false);
-      return;
-    }
-
     btn.disabled = true;
     btn.style.opacity = '0.7';
-    submit(f, cap.token, function (ok) {
-      btn.disabled = false;
-      btn.style.opacity = '';
-      if (ok) {
-        resetForm(f, scope);
-        if (window.hcaptcha && typeof window.hcaptcha.reset === 'function') {
-          try { window.hcaptcha.reset(); } catch (e) { /* ignore */ }
-        }
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ event: 'form_submit_booking' });
-        showModal('Thank you!', MSG.ok, 'Close', false);
-      } else {
-        showModal('Oops!', MSG.fail, 'Close', true);
+
+    /* hCaptcha 垃圾防护（invisible 模式）：提交前先取令牌，取不到则不发送请求 */
+    ensureToken(function (token) {
+      if (!token) {
+        btn.disabled = false;
+        btn.style.opacity = '';
+        showModal('Verification required', MSG.captcha, 'OK', false);
+        return;
       }
+      submit(f, token, function (ok) {
+        btn.disabled = false;
+        btn.style.opacity = '';
+        if (ok) {
+          resetForm(f, scope);
+          if (window.hcaptcha && typeof window.hcaptcha.reset === 'function') {
+            try { window.hcaptcha.reset(); } catch (e) { /* ignore */ }
+          }
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: 'form_submit_booking' });
+          showModal('Thank you!', MSG.ok, 'Close', false);
+        } else {
+          showModal('Oops!', MSG.fail, 'Close', true);
+        }
+      });
     });
   }
 
