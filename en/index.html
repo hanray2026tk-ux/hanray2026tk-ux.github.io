@@ -40,4 +40,15 @@ window.addEventListener("resize",function(){if(current)place(current.btn);});
 window.addEventListener("scroll",function(){if(current)place(current.btn);},{passive:true});
 function init(){apply();if(typeof MutationObserver==="undefined")return;var obs=new MutationObserver(function(){if(busy)return;busy=true;requestAnimationFrame(function(){busy=false;apply();});});obs.observe(document.body,{childList:true,subtree:true});}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
+})();</script><script data-fs-hero-checkbox-script="">/* 首屏预约栏复选框原生兜底：React 未水合，原站勾选逻辑由 JS 绑定，这里用原生事件复原 */
+(function(){"use strict";
+var SPRITE="../en/icons/sprite.svg#ico-checked";
+function toggle(box){var on=box.getAttribute("aria-checked")!=="true";box.setAttribute("aria-checked",on?"true":"false");var old=box.querySelector("[data-fs-cb-icon]");if(on){if(old)return;var ns="http://www.w3.org/2000/svg";var svg=document.createElementNS(ns,"svg");svg.setAttribute("data-fs-cb-icon","1");svg.setAttribute("width","10");svg.setAttribute("height","7");svg.setAttribute("viewBox","0 0 10 7");svg.setAttribute("aria-hidden","true");svg.setAttribute("class","pointer-events-none");var use=document.createElementNS(ns,"use");use.setAttribute("href",SPRITE);svg.appendChild(use);box.appendChild(svg);}else if(old){old.parentNode.removeChild(old);}}
+function boxIn(w){return w.querySelector('[role="checkbox"]');}
+function onClick(ev){var b=boxIn(ev.currentTarget);if(b)toggle(b);}
+function onKey(ev){if(ev.key!==" "&&ev.key!=="Spacebar"&&ev.keyCode!==32)return;var b=boxIn(ev.currentTarget);if(!b)return;ev.preventDefault();toggle(b);}
+function apply(){var boxes=document.querySelectorAll('[role="checkbox"]');for(var i=0;i<boxes.length;i++){var w=boxes[i].parentElement;if(!w||w.className.indexOf("flex")<0)continue;if(w.getAttribute("data-fs-cb")==="1")continue;w.setAttribute("data-fs-cb","1");w.addEventListener("click",onClick);w.addEventListener("keydown",onKey);}}
+var busy=false;
+function init(){apply();if(typeof MutationObserver==="undefined")return;var obs=new MutationObserver(function(){if(busy)return;busy=true;requestAnimationFrame(function(){busy=false;apply();});});obs.observe(document.body,{childList:true,subtree:true});}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
 })();</script></body></html>
