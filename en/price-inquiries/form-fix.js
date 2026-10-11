@@ -13,16 +13,16 @@
     {label:"皮肤科 / 皮肤管理", value:"dermatology"}
   ];
   var SURG2 = [
-    {label:"Facial Contouring", value:"facial-contouring"},
-    {label:"Nose", value:"nose"},
-    {label:"ENT Nose", value:"ent-nose"},
-    {label:"Orthognathic Surgery", value:"orthognathic-surgery"},
-    {label:"Eye", value:"eye"},
-    {label:"Middle Age Eye", value:"middle-age-eye"},
-    {label:"Lifting", value:"lifting"},
-    {label:"Breast Surgery", value:"breast-surgery"},
-    {label:"Body Contouring", value:"body-contouring"},
-    {label:"Male Plastic Surgery", value:"male-plastic-surgery"}
+    {label:"面部轮廓", value:"facial-contouring"},
+    {label:"鼻子", value:"nose"},
+    {label:"鼻科耳鼻喉科", value:"ent-nose"},
+    {label:"正颌手术", value:"orthognathic-surgery"},
+    {label:"眼睛", value:"eye"},
+    {label:"中年眼", value:"middle-age-eye"},
+    {label:"抗衰老", value:"lifting"},
+    {label:"乳房手术", value:"breast-surgery"},
+    {label:"塑形", value:"body-contouring"},
+    {label:"男性整形手术", value:"male-plastic-surgery"}
   ];
 
   var css = ''
