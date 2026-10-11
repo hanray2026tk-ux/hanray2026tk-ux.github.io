@@ -46,7 +46,9 @@
     + '.fx-modal-title{font-size:18px;font-weight:700;color:#1c1c1c;margin-bottom:8px}'
     + '.fx-modal-body{font-size:15px;color:#444;line-height:1.7;margin-bottom:20px}'
     + '.fx-modal-btn{display:block;width:100%;height:48px;border-radius:8px;background:#003984;color:#fff;font-size:16px;font-weight:600;border:0;cursor:pointer}'
-    + '.fx-modal-btn:hover{opacity:.92}';
+    + '.fx-modal-btn:hover{opacity:.92}'
+    + '#faq details[open]>summary+div{grid-template-rows:1fr;opacity:1}'
+    + '#faq details[open]>summary>span:last-child{transform:rotate(45deg)}';
   var st = document.createElement('style');
   st.textContent = css;
   document.head.appendChild(st);
