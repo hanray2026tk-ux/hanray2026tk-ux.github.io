@@ -240,9 +240,34 @@
     }
   }
 
+  /* 把共享的 hCaptcha 组件移入当前可见的预约条内（桌面 / 移动两条预约条共用同一个验证组件） */
+  function placeCaptcha() {
+    var wrap = document.querySelector('[data-fs-hero-captcha]');
+    if (!wrap) return;
+    var slots = document.querySelectorAll('[data-fs-captcha-slot]');
+    if (!slots.length) return;
+    var target = null;
+    for (var i = 0; i < slots.length; i++) {
+      if (slots[i].getClientRects().length) { target = slots[i]; break; }
+    }
+    if (!target) target = slots[0];
+    if (wrap.parentNode !== target) target.appendChild(wrap);
+  }
+
+  var placeTimer = null;
+  function schedulePlace() {
+    if (placeTimer) clearTimeout(placeTimer);
+    placeTimer = setTimeout(placeCaptcha, 120);
+  }
+
   var busy = false;
   function init() {
     bind();
+    placeCaptcha();
+    setTimeout(placeCaptcha, 300);
+    setTimeout(placeCaptcha, 1200);
+    window.addEventListener('load', placeCaptcha);
+    window.addEventListener('resize', schedulePlace, { passive: true });
     if (typeof MutationObserver === 'undefined') return;
     var obs = new MutationObserver(function () {
       if (busy) return;
