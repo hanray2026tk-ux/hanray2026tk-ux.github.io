@@ -9,7 +9,7 @@
     {label:"整形外科（手术类整形项目）", value:"plastic-surgery"},
     {label:"面部轮廓（面部骨骼 / 轮廓类项目）", value:"facial-contouring"},
     {label:"牙科 / 口腔医美（牙齿相关医美项目）", value:"dental"},
-    {label:"微创轻医美（韩系轻医美、注射、小切口等）", value:"petit"},
+    {label:"微创轻医美（轻医美、注射、小切口等）", value:"petit"},
     {label:"皮肤科 / 皮肤管理（光电、护肤、祛斑等皮肤项目）", value:"dermatology"}
   ];
   var SURG2 = [
