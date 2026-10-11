@@ -31,10 +31,29 @@
     sms: 'Please agree to receive SMS notifications.',
     privacy: 'Please agree to the collection and use of personal information.',
     fail: 'Submission failed. Please try again.',
-    ok: 'Your inquiry has been received. Our team will contact you shortly via your messenger.'
+    ok: 'Your inquiry has been received. Our team will contact you shortly via your messenger.',
+    captcha: 'Please complete the human verification ("I am human") before submitting.'
   };
 
+  var CAPTCHA_SELECTOR = '.h-captcha[data-captcha="true"]';
+
   function txt(el) { return (el ? el.textContent : '').replace(/\s+/g, ' ').trim(); }
+
+  /* 读取 hCaptcha 令牌：Web3Forms 开启垃圾防护后，提交必须携带该令牌 */
+  function readCaptcha() {
+    var el = document.querySelector(CAPTCHA_SELECTOR);
+    if (!el) return { present: false, token: '' };
+    var token = '';
+    if (window.hcaptcha && typeof window.hcaptcha.getResponse === 'function') {
+      try { token = window.hcaptcha.getResponse() || ''; } catch (e) { token = ''; }
+    }
+    return { present: true, token: token };
+  }
+
+  function focusCaptcha() {
+    var el = document.querySelector(CAPTCHA_SELECTOR);
+    if (el && el.scrollIntoView) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 
   /* 找到按钮所属的预约表单区域（含 Name 输入框的最近祖先） */
   function scopeOf(btn) {
@@ -148,7 +167,7 @@
   }
 
   /* ---------- 提交 ---------- */
-  function submit(f, done) {
+  function submit(f, captchaToken, done) {
     var payload = {
       access_key: WEB3FORMS_KEY,
       subject: 'New Booking — FANSHI (Quick Consultation)',
@@ -160,6 +179,7 @@
       privacy_agreed: f.consentPrivacy,
       sms_agreed: f.consentSms
     };
+    if (captchaToken) payload['h-captcha-response'] = captchaToken;
     fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -181,13 +201,24 @@
 
     if (msg) { showModal('Please check your input', msg, 'OK', false); return; }
 
+    /* hCaptcha 垃圾防护：令牌缺失时先提示完成人机验证，不发出请求 */
+    var cap = readCaptcha();
+    if (cap.present && !cap.token) {
+      focusCaptcha();
+      showModal('Verification required', MSG.captcha, 'OK', false);
+      return;
+    }
+
     btn.disabled = true;
     btn.style.opacity = '0.7';
-    submit(f, function (ok) {
+    submit(f, cap.token, function (ok) {
       btn.disabled = false;
       btn.style.opacity = '';
       if (ok) {
         resetForm(f, scope);
+        if (window.hcaptcha && typeof window.hcaptcha.reset === 'function') {
+          try { window.hcaptcha.reset(); } catch (e) { /* ignore */ }
+        }
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ event: 'form_submit_booking' });
         showModal('Thank you!', MSG.ok, 'Close', false);
