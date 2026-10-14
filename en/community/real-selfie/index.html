@@ -200,7 +200,7 @@ $RC=function(a,b){if(b=document.getElementById(b))(a=document.getElementById(a))
       var labels = it.tagsLabel.map(function (t) {
         return '<span class="caption3 md:caption1 text-idh-gray-700">#<!-- -->' + esc(t) + '</span>';
       }).join('');
-      return '<li><a class="flex flex-col gap-[12px] md:gap-[24px] text-left" href="' + esc(it.href) + '">' +
+      return '<li><a class="flex flex-col gap-[12px] md:gap-[24px] text-left">' +
         '<div class="relative aspect-[342/428] bg-idh-gray-100 overflow-hidden">' +
           '<img alt="' + esc(it.imageAlt) + '" loading="lazy" decoding="async" data-nimg="fill" class="object-cover" style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent" src="' + esc(it.image) + '"/>' +
           '<img alt="" aria-hidden="true" loading="lazy" width="40" height="40" decoding="async" data-nimg="1" class="absolute left-4 top-4 z-10 h-10 w-10" style="color:transparent" src="../../../media/img/common/fanshi-logo-white.png"/>' +
