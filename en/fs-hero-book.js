@@ -15,12 +15,12 @@
   var SURGERY_LABELS = {
     'List of Surgeries': 1, '面部轮廓': 1, 'Face Contouring': 1, 'Nose': 1, 'Eye': 1,
     'Anti-aging': 1, 'Breast Surgery': 1, 'Body Contouring': 1, 'Orthognathic Surgery': 1,
-    'ENT': 1, 'Middle Age Eye': 1, 'Male Plastic Surgery': 1
+    'Middle Age Eye': 1, 'Male Plastic Surgery': 1
   };
   var SURGERY_VALUE_LABEL = {
     'face-contouring': 'Face Contouring', 'nose': 'Nose', 'eye': 'Eye', 'anti-aging': 'Anti-aging',
     'breast': 'Breast Surgery', 'body-contouring': 'Body Contouring',
-    'orthognathic-surgery': 'Orthognathic Surgery', 'ent-nose': 'ENT',
+    'orthognathic-surgery': 'Orthognathic Surgery',
     'middle-age-eye': 'Middle Age Eye', 'male-plastic-surgery': 'Male Plastic Surgery'
   };
 

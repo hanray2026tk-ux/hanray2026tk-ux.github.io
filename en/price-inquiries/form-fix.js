@@ -15,7 +15,6 @@
   var SURG2 = [
     {label:"面部轮廓", value:"facial-contouring"},
     {label:"鼻子", value:"nose"},
-    {label:"鼻科耳鼻喉科", value:"ent-nose"},
     {label:"正颌手术", value:"orthognathic-surgery"},
     {label:"眼睛", value:"eye"},
     {label:"中年眼", value:"middle-age-eye"},

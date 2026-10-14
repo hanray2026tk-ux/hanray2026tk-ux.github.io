@@ -9,7 +9,6 @@
   var CATEGORIES = [
     { value: 'face-contouring',      label: 'Face Contouring' },
     { value: 'nose',                 label: 'Nose' },
-    { value: 'ent-nose',             label: 'ENT Nose' },
     { value: 'orthognathic-surgery', label: 'Orthognathic Surgery' },
     { value: 'eye',                  label: 'Eye' },
     { value: 'middle-age-eye',       label: 'Middle Age Eye' },
