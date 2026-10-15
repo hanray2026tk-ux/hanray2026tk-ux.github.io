@@ -21,7 +21,7 @@
     { label: '乳房手术', value: 'breast' },
     { label: '塑形', value: 'body-contouring' },
     { label: '正颌手术', value: 'orthognathic-surgery' },
-    { label: '鼻科耳鼻喉科', value: 'ent-nose' },
+    { label: '牙科', value: 'dentistry' },
     { label: '中年眼', value: 'middle-age-eye' },
     { label: '男性整形手术', value: 'male-plastic-surgery' }
   ];
