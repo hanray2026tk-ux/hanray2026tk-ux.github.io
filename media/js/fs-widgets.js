@@ -215,6 +215,10 @@
 
   ready(function () {
     injectCss();
+    // fs-widgets.js 以 defer 加载，一定在 fs-hero-book.js 之后执行；
+    // 若页面已引入 fs-hero-book.js，预约栏（下拉/勾选框/立即预约）统一由它接管，
+    // 此处不再重复绑定，否则同一控件会被绑定两次（弹出两个下拉、勾选状态互相抵消）。
+    if (document.querySelector('script[src*="fs-hero-book"]')) { return; }
     initDropdowns();
     initCheckboxes();
     initSubmit();

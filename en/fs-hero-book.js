@@ -13,14 +13,15 @@
 
   var MESSENGER_LABELS = { 'Messenger': 1, 'KakaoTalk': 1, 'WhatsApp': 1, 'LINE': 1, '客服 id': 1, '在线咨询': 1 };
   var SURGERY_LABELS = {
-    'List of Surgeries': 1, '手术项目': 1, '面部轮廓': 1, 'Face Contouring': 1, 'Nose': 1, 'Eye': 1,
-    'Anti-aging': 1, 'Breast Surgery': 1, 'Body Contouring': 1, 'Orthognathic Surgery': 1,
-    'Middle Age Eye': 1, 'Male Plastic Surgery': 1
+    'List of Surgeries': 1, '手术项目': 1, '面部轮廓': 1, '鼻子': 1, '眼睛': 1, '抗衰老': 1,
+    '乳房手术': 1, '塑形': 1, '正颌手术': 1, '牙科': 1, '中年眼': 1, '男性整形手术': 1,
+    'Face Contouring': 1, 'Nose': 1, 'Eye': 1, 'Anti-aging': 1, 'Breast Surgery': 1,
+    'Body Contouring': 1, 'Orthognathic Surgery': 1, 'Middle Age Eye': 1, 'Male Plastic Surgery': 1
   };
   var SURGERY_VALUE_LABEL = {
     'face-contouring': 'Face Contouring', 'nose': 'Nose', 'eye': 'Eye', 'anti-aging': 'Anti-aging',
     'breast': 'Breast Surgery', 'body-contouring': 'Body Contouring',
-    'orthognathic-surgery': 'Orthognathic Surgery',
+    'orthognathic-surgery': 'Orthognathic Surgery', 'dentistry': 'Dentistry',
     'middle-age-eye': 'Middle Age Eye', 'male-plastic-surgery': 'Male Plastic Surgery'
   };
 
@@ -262,10 +263,9 @@
   var CN_OPT = {
     messenger: [['Messenger', 'messenger'], ['KakaoTalk', 'kakao'], ['WhatsApp', 'whatsapp'], ['LINE', 'line']],
     surgery: [
-      ['面部轮廓', 'face-contouring'], ['Nose', 'nose'], ['Eye', 'eye'], ['Anti-aging', 'anti-aging'],
-      ['Breast Surgery', 'breast'], ['Body Contouring', 'body-contouring'],
-      ['Orthognathic Surgery', 'orthognathic-surgery'], ['Middle Age Eye', 'middle-age-eye'],
-      ['Male Plastic Surgery', 'male-plastic-surgery']
+      ['面部轮廓', 'face-contouring'], ['鼻子', 'nose'], ['眼睛', 'eye'], ['抗衰老', 'anti-aging'],
+      ['乳房手术', 'breast'], ['塑形', 'body-contouring'], ['正颌手术', 'orthognathic-surgery'],
+      ['牙科', 'dentistry'], ['中年眼', 'middle-age-eye'], ['男性整形手术', 'male-plastic-surgery']
     ]
   };
   var CN_MSG_DEFAULT = '在线咨询';
