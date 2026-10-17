@@ -96,13 +96,28 @@
     return s;
   }
 
-  /* 文本替换：依次尝试 4 种转义形态，把静态 HTML 与 RSC 里的同一句话一起改掉 */
+  /* RSC payload（self.__next_f）里 JS 字符串的转义形态：\u003c \u0026 \u0022 … */
+  function jsEsc(s) {
+    return String(s)
+      .replace(/\\/g, '\\\\')
+      .replace(/"/g, '\\"')
+      .replace(/'/g, '\\u0027')
+      .replace(/</g, '\\u003c')
+      .replace(/>/g, '\\u003e')
+      .replace(/&/g, '\\u0026')
+      .replace(/\n/g, '\\n');
+  }
+
+  /* 文本替换：依次尝试多种转义形态，把静态 HTML 与 RSC 里的同一句话一起改掉 */
   function applyText(s, old, nw) {
     var pairs = [
       [htmlEscape(old, true), htmlEscape(nw, true)],
       [htmlEscape(old, false), htmlEscape(nw, false)],
       [old.replace(/'/g, '&#x27;'), nw.replace(/'/g, '&#x27;')],
-      [old, nw]
+      [old, nw],
+      [jsEsc(old), jsEsc(nw)],
+      [jsEsc(htmlEscape(old, true)), jsEsc(htmlEscape(nw, true))],
+      [jsEsc(htmlEscape(old, false)), jsEsc(htmlEscape(nw, false))]
     ];
     var out = s, total = 0, seen = {}, i;
     for (i = 0; i < pairs.length; i++) {
@@ -510,7 +525,7 @@
       var path = pageRel.replace(/^\//, '');
       return getFile(path).then(function (info) {
         if (!info.content) throw new Error('文件过大或为空，无法在线编辑');
-        var src = b64ToUtf8(info.content), changed = 0;
+        var src = b64ToUtf8(info.content), changed = 0, risky = [];
 
         imgEdits.forEach(function (im) {
           if (!im.newSrc) return;
@@ -525,8 +540,14 @@
           var r = applyText(src, ed.old, ed.new);
           if (!r) { report.push({ kind: '文本', old: ed.old, status: '未找到' }); return; }
           src = r.out; changed += r.n;
+          if (r.n > 4) risky.push('「' + ed.old + '」命中 ' + r.n + ' 处');
           report.push({ kind: '文本', old: ed.old, status: r.n > 1 ? ('已替换 ' + r.n + ' 处') : '已替换' });
         });
+
+        if (risky.length && !confirm('以下改动每处命中超过 4 次，可能误伤同页其它位置：\n\n' + risky.join('\n') + '\n\n仍要提交吗？')) {
+          report.push({ kind: '页面', old: path, status: '已取消：命中过多，未提交' });
+          return null;
+        }
 
         if (!changed) {
           report.push({ kind: '页面', old: path, status: '无实际变化，未提交' });
