@@ -50,8 +50,8 @@
       var cls = BASE + (k % 7 === 0 ? '' : ' border-l');
       var txt = 'lg:body1 relative z-10 caption3 ';
       if (isSel) {
-        cls += ' bg-idh-primary-01 cursor-pointer';
-        txt += 'text-white';
+        cls += ' !bg-[oklch(93.2%_0.032_255.585)] cursor-pointer';
+        txt += 'text-idh-gray-900';
       } else if (open) {
         cls += ' cursor-pointer hover:bg-idh-primary-01';
         txt += 'text-idh-gray-900';
