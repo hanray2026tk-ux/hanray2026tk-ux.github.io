@@ -184,7 +184,7 @@
   /* ---------- 手术目录 ---------- */
   (function(){
     var label = null, labels = document.querySelectorAll('[data-slot="field-label"]');
-    for(var i=0;i<labels.length;i++){ if(labels[i].textContent.trim()==='手术目录'){ label = labels[i]; break; } }
+    for(var i=0;i<labels.length;i++){ if(labels[i].textContent.trim()==='手术项目'||labels[i].textContent.trim()==='手术目录'){ label = labels[i]; break; } }
     if(!label) return;
     var field = label.closest('[data-slot="field"]'); if(!field) return;
     var btns = field.querySelectorAll('button'); if(btns.length < 2) return;
