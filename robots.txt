@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /editor/
+Disallow: /site-index.html
+Disallow: /en/community/id-blog/
+
+Sitemap: https://fanshiaesthetics.com/sitemap.xml
