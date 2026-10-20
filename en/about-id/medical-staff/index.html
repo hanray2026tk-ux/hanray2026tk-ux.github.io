@@ -213,6 +213,7 @@ $RC=function(a,b){if(b=document.getElementById(b))(a=document.getElementById(a))
   }
 
   var state={spec:'',query:''};
+  var hitTimer=null;
 
   function apply(opt){
     opt=opt||{};
@@ -236,8 +237,9 @@ $RC=function(a,b){if(b=document.getElementById(b))(a=document.getElementById(a))
     if(msg) msg.style.display=(shown===0)?'block':'none';
     if(opt.scroll){
       if(first){
+        clearTimeout(hitTimer);
         first.classList.add('fs-ms-hit');
-        setTimeout(function(){first.classList.remove('fs-ms-hit');},2600);
+        hitTimer=setTimeout(function(){first.classList.remove('fs-ms-hit');},2600);
         scrollToEl(first,headOffset());
       }else{
         scrollToEl(grid,headOffset());
