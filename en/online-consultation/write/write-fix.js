@@ -7,15 +7,15 @@
 
   /* 顶级手术分类（来自原站 /api/v1/surgery-categories 中 depth=1 的项，按 sort_order 排序） */
   var CATEGORIES = [
-    { value: 'face-contouring',      label: 'Face Contouring' },
-    { value: 'nose',                 label: 'Nose' },
-    { value: 'orthognathic-surgery', label: 'Orthognathic Surgery' },
-    { value: 'eye',                  label: 'Eye' },
-    { value: 'middle-age-eye',       label: 'Middle Age Eye' },
-    { value: 'anti-aging',           label: 'Anti-aging' },
-    { value: 'breast',               label: 'Breast Surgery' },
-    { value: 'body-contouring',      label: 'Body Contouring' },
-    { value: 'male-plastic-surgery', label: 'Male Plastic Surgery' }
+    { value: 'face-contouring',      label: '面部轮廓' },
+    { value: 'nose',                 label: '鼻部整形' },
+    { value: 'orthognathic-surgery', label: '正颌手术' },
+    { value: 'eye',                  label: '眼部整形' },
+    { value: 'middle-age-eye',       label: '中年眼部整形' },
+    { value: 'anti-aging',           label: '抗衰老' },
+    { value: 'breast',               label: '胸部整形' },
+    { value: 'body-contouring',      label: '身体塑形' },
+    { value: 'male-plastic-surgery', label: '男性整形' }
   ];
 
   var css = ''
@@ -30,6 +30,8 @@
     + '.fx-check-mark{display:flex;align-items:center;justify-content:center;width:100%;height:100%}'
     + '.fx-editor{display:block;width:100%;min-height:240px;box-sizing:border-box;border:0;outline:0;padding:12px;background:transparent;color:#333;font:inherit;font-size:15px;line-height:1.7;resize:vertical}'
     + '.fx-editor::placeholder{color:#9a9a9a}'
+    + '.fx-upload-hint{font-size:13px;color:#666;margin-top:8px;line-height:1.6}'
+    + '.fx-upload-hint a{color:#003984;text-decoration:underline}'
     + '.fx-invalid{border-color:#f87171 !important;box-shadow:0 0 0 3px rgba(248,113,113,.35) !important}'
     + '.fx-err{color:#dc2626;font-size:13px;margin-top:6px}'
     + '.fx-modal-mask{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;display:flex;align-items:center;justify-content:center;padding:16px}'
@@ -52,7 +54,7 @@
     box.querySelector('.fx-modal-title').textContent = title;
     box.querySelector('.fx-modal-body').innerHTML = bodyHtml;
     var act = mk('div');
-    var ok = mk('button', 'fx-modal-btn'); ok.type = 'button'; ok.textContent = okText || 'OK';
+    var ok = mk('button', 'fx-modal-btn'); ok.type = 'button'; ok.textContent = okText || '确定';
     ok.addEventListener('click', function () { mask.remove(); });
     act.appendChild(ok); box.appendChild(act); mask.appendChild(box);
     mask.addEventListener('click', function (e) { if (e.target === mask) mask.remove(); });
@@ -143,17 +145,18 @@
     var box = $('div[style*="min-height:240px"]');
     if (!box) return;
     msgArea = mk('textarea', 'fx-editor');
-    msgArea.setAttribute('placeholder', 'Enter your message');
+    msgArea.setAttribute('placeholder', '请输入内容');
     box.appendChild(msgArea);
   })();
 
-  /* ---------- 4) 文件选择：显示所选文件名 ---------- */
+  /* ---------- 4) 附件上传入口：免费版 Web3Forms 不支持，隐藏并引导走 WhatsApp ---------- */
   var fileInputs = document.querySelectorAll('input[type="file"]');
   Array.prototype.forEach.call(fileInputs, function (inp) {
-    inp.addEventListener('change', function () {
-      var span = inp.parentElement ? inp.parentElement.querySelector('span') : null;
-      if (span) span.textContent = (inp.files && inp.files[0]) ? inp.files[0].name : '选择文件';
-    });
+    var wrap = fieldGroupOf(inp) || inp.parentElement;
+    if (!wrap || document.querySelector('.fx-upload-hint')) return;
+    wrap.classList.add('fx-hidden');
+    var hint = mk('p', 'fx-upload-hint', '如需发送照片或资料，请通过 <a href="https://wa.me/8618667872626" target="_blank" rel="noopener">WhatsApp</a> 联系我们。');
+    if (wrap.parentElement) wrap.parentElement.insertBefore(hint, wrap.nextSibling);
   });
 
   /* ---------- 5) 「撰写」提交 ---------- */
@@ -162,14 +165,14 @@
     for (var i = 0; i < all.length; i++) { if (all[i].textContent.trim() === '撰写') { submitBtn = all[i]; break; } }
     if (!submitBtn) return;
 
-    var nameEl = $('input[placeholder="Enter your name"]');
-    var titleEl = $('input[placeholder="Title"]');
+    var nameEl = $('input[placeholder="请输入姓名"]');
+    var titleEl = $('input[placeholder="请输入标题"]');
     var pwdEl = $('input[type="password"]');
 
     function setBusy(on) {
       submitBtn.disabled = !!on;
       submitBtn.style.opacity = on ? '.6' : '';
-      submitBtn.textContent = on ? 'Submitting...' : '撰写';
+      submitBtn.textContent = on ? '提交中...' : '撰写';
     }
 
     submitBtn.addEventListener('click', function (e) {
@@ -184,16 +187,16 @@
 
       /* 校验顺序与原站一致，命中即提示并中止 */
       var err = null;
-      if (!name) { err = 'Please enter your name.'; markInvalid(nameEl, err); }
-      else if (!selectedCategory) { err = 'Please select a category.'; markInvalid(catBtn, err); }
-      else if (!title) { err = 'Please enter a title.'; markInvalid(titleEl, err); }
-      else if (!msg) { err = 'Please enter your message.'; markInvalid(msgArea, err); }
-      else if (!pwd) { err = 'Please enter a password.'; markInvalid(pwdEl, err); }
-      else if (pwd.length < 8) { err = 'Password must be at least 8 characters.'; markInvalid(pwdEl, err); }
-      if (err) { showModal('Please check your input', err, 'OK'); return; }
+      if (!name) { err = '请输入姓名。'; markInvalid(nameEl, err); }
+      else if (!selectedCategory) { err = '请选择咨询分类。'; markInvalid(catBtn, err); }
+      else if (!title) { err = '请输入标题。'; markInvalid(titleEl, err); }
+      else if (!msg) { err = '请输入咨询内容。'; markInvalid(msgArea, err); }
+      else if (!pwd) { err = '请输入密码。'; markInvalid(pwdEl, err); }
+      else if (pwd.length < 8) { err = '密码至少需要 8 个字符。'; markInvalid(pwdEl, err); }
+      if (err) { showModal('请检查填写内容', err, '确定'); return; }
 
       if (!WEB3FORMS_KEY) {
-        showModal('Notice', 'Static site: the form backend is not connected yet, your message was not actually sent.', 'OK');
+        showModal('提示', '当前为静态站点，表单后端尚未连接，您的留言未实际发送。', '确定');
         return;
       }
 
@@ -202,7 +205,7 @@
       var captchaToken = '';
       if (captchaEl && window.hcaptcha && window.hcaptcha.getResponse) {
         captchaToken = window.hcaptcha.getResponse() || '';
-        if (!captchaToken) { showModal('Verification required', 'Please complete the human verification ("I am human") before submitting.', 'OK'); return; }
+        if (!captchaToken) { showModal('需要人机验证', '提交前请先完成人机验证（勾选"我不是机器人"）。', '确定'); return; }
       }
 
       setBusy(true);
@@ -216,23 +219,20 @@
       fd.append('message', msg);
       fd.append('is_private', isPrivate ? 'true' : 'false');
       if (captchaToken) fd.append('h-captcha-response', captchaToken);
-      Array.prototype.forEach.call(fileInputs, function (inp) {
-        if (inp.files && inp.files[0]) fd.append('attachment', inp.files[0]);
-      });
 
       fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { 'Accept': 'application/json' }, body: fd })
         .then(function (r) { return r.json(); })
         .then(function (res) {
           setBusy(false);
           if (res && res.success) {
-            showModal('Submitted', 'Your online consultation has been submitted successfully. We will get back to you soon.', 'OK');
+            showModal('提交成功', '您的在线咨询已提交成功，我们会尽快与您联系。', '确定');
           } else {
-            showModal('Submission failed', (res && res.message) ? res.message : 'Failed to submit. Please try again.', 'OK');
+            showModal('提交失败', (res && res.message) ? '提交失败，请稍后重试。' : '提交失败，请重试。', '确定');
           }
         })
         .catch(function () {
           setBusy(false);
-          showModal('Submission failed', 'Network error. Please check your connection and try again.', 'OK');
+          showModal('提交失败', '网络异常，请检查网络连接后重试。', '确定');
         });
     });
   })();
@@ -245,10 +245,10 @@
       var open = function () { mMenu.classList.remove('hidden'); mMenu.classList.add('flex'); if (mBtn) mBtn.setAttribute('aria-expanded', 'true'); };
       var close = function () { mMenu.classList.add('hidden'); mMenu.classList.remove('flex'); if (mBtn) mBtn.setAttribute('aria-expanded', 'false'); };
       if (mBtn) mBtn.addEventListener('click', function (e) { e.preventDefault(); mMenu.classList.contains('hidden') ? open() : close(); });
-      var cbtn = mMenu.querySelector('button[aria-label="Close inquiry menu"]');
+      var cbtn = mMenu.querySelector('button[aria-label="关闭咨询菜单"]');
       if (cbtn) cbtn.addEventListener('click', function (e) { e.preventDefault(); close(); });
     }
-    var dNav = document.querySelector('nav[aria-label="Inquiry menu"]');
+    var dNav = document.querySelector('nav[aria-label="咨询菜单"]');
     if (dNav) {
       var dBtn = dNav.previousElementSibling;
       if (dBtn) dBtn.addEventListener('click', function (e) {
