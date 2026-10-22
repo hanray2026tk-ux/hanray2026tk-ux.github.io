@@ -108,10 +108,9 @@
     p.grid.appendChild(frag);
   }
 
+  render();
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', render);
-  } else {
-    render();
   }
   window.addEventListener('load', render);
 
