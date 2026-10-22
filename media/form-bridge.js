@@ -4,7 +4,7 @@
   window.__fsBridgeLoaded = true;
 
   var API_HOST = 'api-en.idh-global.com';
-  var WA_LINK = 'https://wa.me/qr/X2OA3W2QKKMIB1';
+  var WA_PHONE = '8618667872626';
   var WECHAT_ID = 'Fsym202681';
 
   var SURGERY = {
@@ -95,7 +95,7 @@
     row.style.cssText = 'display:flex;flex-direction:column;gap:10px;';
 
     var wa = document.createElement('a');
-    wa.href = WA_LINK;
+    wa.href = 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent(text);
     wa.target = '_blank';
     wa.rel = 'noopener';
     wa.textContent = 'Send on WhatsApp';
