@@ -1,0 +1,159 @@
+/* ==============================
+   凡是与美 · 全站字体与排版
+   免费开源字体（SIL OFL），自托管
+   - 拉丁文：Inter（无衬线）/ Cormorant Garamond（衬线）
+   - 中文：优先系统高质量字体，逐级回退
+   ============================== */
+
+/* ---------- 拉丁：Inter 可变字重（正文 / 标题 / UI） ---------- */
+@font-face {
+  font-family: "FS Sans";
+  src: url("/preview/media/fonts/inter-latin-var.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
+    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ---------- 拉丁：Cormorant Garamond（品牌衬线 / 大标题 / 引言） ---------- */
+@font-face {
+  font-family: "FS Serif";
+  src: url("/preview/media/fonts/cormorant-300.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "FS Serif";
+  src: url("/preview/media/fonts/cormorant-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "FS Serif";
+  src: url("/preview/media/fonts/cormorant-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "FS Serif";
+  src: url("/preview/media/fonts/cormorant-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "FS Serif";
+  src: url("/preview/media/fonts/cormorant-500i.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ---------- 统一字体令牌 ---------- */
+:root {
+  --fs-sans: "FS Sans", "PingFang SC", "HarmonyOS Sans SC", "MiSans",
+    "Source Han Sans SC", "Noto Sans SC", "Microsoft YaHei", system-ui,
+    -apple-system, "Segoe UI", sans-serif;
+  --fs-serif: "FS Serif", "Songti SC", "STSong", "Noto Serif SC",
+    "Source Han Serif SC", "SimSun", Georgia, serif;
+  --font-sans: var(--fs-sans);
+  --default-font-family: var(--fs-sans);
+  --font-pretendard: var(--fs-sans);
+
+  /* 文字色阶：中性柔和灰，替代纯黑，与品牌粉底色更协调 */
+  --color-idh-gray-900: #1b1b20;
+  --color-idh-gray-800: #3d3d44;
+  --color-idh-gray-700: #5a5a63;
+  --color-idh-gray-600: #7c7c85;
+  --color-idh-gray-500: #9b9ba4;
+}
+
+html {
+  font-family: var(--fs-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* 覆盖页面根节点上的旧字体类（优先级高于 .pretendard_*） */
+body,
+body[class] {
+  font-family: var(--fs-sans);
+  letter-spacing: 0;
+}
+
+/* ---------- 标题：参考原站 idhospital.com，统一 500 字重 / 120% 行高 / -0.02em 字距 ---------- */
+.title1,
+.title2,
+.title3 {
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 48rem) {
+  .md\:title1,
+  .md\:title2,
+  .md\:title3 {
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+}
+
+@media (min-width: 64rem) {
+  .lg\:title1,
+  .lg\:title2,
+  .lg\:title3 {
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* 次级标题同样对齐原站的 500 字重 */
+.subtitle1,
+.subtitle2,
+.subtitle3 {
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+/* 语义标题统一 500 字重，去除过粗的 700/800 工具类影响 */
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 500;
+}
+
+/* 正文段落：参考原站行距节奏，中文长段落略作放宽，颜色比标题柔一档 */
+main p:not([class]) {
+  line-height: 1.7;
+  color: var(--color-idh-gray-700);
+}
+
+/* 选中文字：品牌淡粉底 + 深墨字 */
+::selection {
+  background: #fbd9e7;
+  color: var(--color-idh-gray-900);
+}
+
+main strong,
+main b {
+  font-weight: 600;
+}
+
+/* ---------- 品牌衬线标题 ---------- */
+.fs-display {
+  font-family: var(--fs-serif);
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+}

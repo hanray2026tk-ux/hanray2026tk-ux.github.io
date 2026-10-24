@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="80" height="96" viewBox="4 -2 80 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 40" transform="translate(-16,0)">
+<path id="Vector 2" d="M46,10 C54,12 58.5,20 59,27 C59.2,29 58,30 56.5,30.5 C59,33 64,38.5 65.5,42.5 C66.5,44.5 63.5,45 61,44.5 C60,44.4 60,46.6 60.8,47.6 C59,48.6 57,49.2 56.6,50.2 C58.6,51.2 60.2,52.8 60.2,54.4 C60.2,57.8 58.8,61.2 56.4,63.2 C53,66.6 46.8,68 42.4,65.6 C37.2,62.3 33,54.5 32,43.5 C31,29.5 35.6,13.4 46,10 Z" stroke="#333333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Ellipse 13" d="M40.5,10.5 C44.5,5 38.5,0 32.5,2 C25.5,4 25.5,11 31.5,13 C34.5,14 38.5,12 40.5,10.5 Z" stroke="#333333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector 3" d="M44,17 C49,18.5 53.5,22 56,27.5" stroke="#333333" stroke-width="2.2" stroke-linecap="round"/>
+<path id="Vector 4" d="M49,37 C51.5,35.8 54.5,35.8 57,37" stroke="#333333" stroke-width="2.2" stroke-linecap="round"/>
+<path id="Vector 5" d="M74,24 C80,40 78,56 68,68" stroke="#E06D97" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="2.5 6.5"/>
+<path id="Vector 6" d="M87,78 Q87,85 94,85 Q87,85 87,92 Q87,85 80,85 Q87,85 87,78 Z" stroke="#E06D97" stroke-width="2.2" stroke-linejoin="round"/>
+</g>
+</svg>
