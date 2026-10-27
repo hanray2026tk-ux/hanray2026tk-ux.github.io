@@ -54,6 +54,26 @@
   font-display: swap;
 }
 
+/* ---------- 标题衬线：Playfair Display 500（拉丁）/ 思源宋体 500（中文） ---------- */
+@font-face {
+  font-family: "FS Display";
+  src: url("/media/fonts/playfair-display-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
+    U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "FS Serif SC";
+  src: url("/media/fonts/noto-serif-sc-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ---------- 统一字体令牌 ---------- */
 :root {
   --fs-sans: "FS Sans", "PingFang SC", "HarmonyOS Sans SC", "MiSans",
@@ -61,16 +81,19 @@
     -apple-system, "Segoe UI", sans-serif;
   --fs-serif: "FS Serif", "Songti SC", "STSong", "Noto Serif SC",
     "Source Han Serif SC", "SimSun", Georgia, serif;
+  --fs-heading: "FS Display", "FS Serif SC", "Songti SC", "STSong",
+    "Noto Serif SC", "Source Han Serif SC", "SimSun", Georgia, serif;
   --font-sans: var(--fs-sans);
   --default-font-family: var(--fs-sans);
   --font-pretendard: var(--fs-sans);
 
-  /* 文字色阶：中性柔和灰，替代纯黑，与品牌粉底色更协调 */
-  --color-idh-gray-900: #1b1b20;
-  --color-idh-gray-800: #3d3d44;
-  --color-idh-gray-700: #5a5a63;
-  --color-idh-gray-600: #7c7c85;
-  --color-idh-gray-500: #9b9ba4;
+  /* 文字色阶：中性柔和灰，替代纯黑，与品牌粉底色更协调
+     2026-10 优化：整体加深半档，16px 正文对比度从 4.0:1 提升到 4.9:1 */
+  --color-idh-gray-900: #1d1d22;
+  --color-idh-gray-800: #3a3a42;
+  --color-idh-gray-700: #525259;
+  --color-idh-gray-600: #6d6d77;
+  --color-idh-gray-500: #98989f;
 }
 
 html {
@@ -87,22 +110,24 @@ body[class] {
   letter-spacing: 0;
 }
 
-/* ---------- 标题：参考原站 idhospital.com，统一 500 字重 / 120% 行高 / -0.02em 字距 ---------- */
+/* ---------- 标题：衬线（Playfair Display 500 / 思源宋体 500）/ 128% 行高 ---------- */
 .title1,
 .title2,
 .title3 {
+  font-family: var(--fs-heading);
   font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  line-height: 1.28;
+  letter-spacing: -0.01em;
 }
 
 @media (min-width: 48rem) {
   .md\:title1,
   .md\:title2,
   .md\:title3 {
+    font-family: var(--fs-heading);
     font-weight: 500;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
+    line-height: 1.28;
+    letter-spacing: -0.01em;
   }
 }
 
@@ -110,9 +135,10 @@ body[class] {
   .lg\:title1,
   .lg\:title2,
   .lg\:title3 {
+    font-family: var(--fs-heading);
     font-weight: 500;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
+    line-height: 1.28;
+    letter-spacing: -0.01em;
   }
 }
 
@@ -120,7 +146,9 @@ body[class] {
 .subtitle1,
 .subtitle2,
 .subtitle3 {
+  font-family: var(--fs-heading);
   font-weight: 500;
+  line-height: 1.35;
   letter-spacing: 0;
 }
 
@@ -129,7 +157,101 @@ h1,
 h2,
 h3,
 h4 {
+  font-family: var(--fs-heading);
   font-weight: 500;
+}
+
+/* 项目页首屏大标题（原 Abril Fatface 粗展示体）：统一到标题衬线 */
+:is(.visual-title, .visual-mobile-title, [class*="visual-title"], [class*="abril_fatface"]) {
+  font-family: var(--fs-heading);
+  font-weight: 500;
+}
+
+/* ---------- 字号阶梯（全站统一） ---------- */
+/* 桌面端标题略收紧，避免中文大字号压排版 */
+@media (min-width: 48rem) {
+  .md\:title1 {
+    font-size: 40px;
+  }
+  .md\:title2 {
+    font-size: 34px;
+  }
+  .md\:title3 {
+    font-size: 30px;
+  }
+  .md\:subtitle1 {
+    font-size: 26px;
+  }
+}
+
+@media (min-width: 64rem) {
+  .lg\:title1 {
+    font-size: 40px;
+  }
+  .lg\:title2 {
+    font-size: 34px;
+  }
+  .lg\:title3 {
+    font-size: 30px;
+  }
+  .lg\:subtitle1 {
+    font-size: 26px;
+  }
+}
+
+/* 小字号下限提高：12px 中文字在移动端过小，统一抬到 13px
+   注意：必须限定断点，否则会盖掉桌面的 md:body1 / md:caption2 */
+@media (max-width: 47.999rem) {
+  .body3,
+  .caption3 {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 48rem) {
+  .md\:body3,
+  .md\:caption3 {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 64rem) {
+  .lg\:body3,
+  .lg\:caption3 {
+    font-size: 13px;
+  }
+}
+
+/* 首屏品牌衬线大标题：80px 中文偏重，桌面端收至 72px（移动端保持 50px，断行正好落在标点后） */
+@media (min-width: 64rem) {
+  .lg\:text-\[80px\] {
+    font-size: 72px;
+  }
+}
+
+/* ---------- 行距与字距 ---------- */
+/* 正文：130% 对中文长句过密，统一 170% */
+:is(.body1, .body2, .body3, .md\:body1, .md\:body2, .md\:body3, .lg\:body1, .lg\:body2, .lg\:body3) {
+  line-height: 1.7;
+}
+
+/* 说明文案：145%，避免小字挤在一起 */
+:is(.caption1, .caption2, .caption3, .md\:caption1, .md\:caption2, .md\:caption3, .lg\:caption1, .lg\:caption2, .lg\:caption3) {
+  line-height: 1.45;
+}
+
+/* 中文标题不做负字距，改用 0.01em 轻微透气 */
+html[lang="zh-CN"] :is(.title1, .title2, .title3, .subtitle1, .subtitle2, .subtitle3) {
+  letter-spacing: 0.01em;
+}
+
+/* 断行优化：标题均衡换行、正文避免孤字 */
+:is(h1, h2, h3, h4, .fs-display) {
+  text-wrap: balance;
+}
+
+main p {
+  text-wrap: pretty;
 }
 
 /* 正文段落：参考原站行距节奏，中文长段落略作放宽，颜色比标题柔一档 */
@@ -149,11 +271,11 @@ main b {
   font-weight: 600;
 }
 
-/* ---------- 品牌衬线标题 ---------- */
+/* ---------- 品牌衬线大标题 ---------- */
 .fs-display {
-  font-family: var(--fs-serif);
-  font-weight: 400;
+  font-family: var(--fs-heading);
+  font-weight: 500;
   font-style: normal;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.01em;
   line-height: 1.2;
 }
