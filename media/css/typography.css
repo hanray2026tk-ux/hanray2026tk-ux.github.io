@@ -279,3 +279,28 @@ main b {
   letter-spacing: 0.01em;
   line-height: 1.2;
 }
+
+/* ---------- 悬浮咨询按钮：拉丁短标签在 60/80px 圆内留出呼吸空间 ---------- */
+[aria-label="Consultation"] {
+  font-size: 12px;
+  letter-spacing: 0.01em;
+}
+@media (min-width: 768px) {
+  [aria-label="Consultation"] {
+    font-size: 14px;
+  }
+}
+
+/* ---------- 悬浮咨询菜单：WhatsApp 等短词不压到药丸描边 ---------- */
+[aria-label="Consultation menu"] span,
+#floating-inquiry-menu-mobile span {
+  font-size: 12px;
+  letter-spacing: -0.01em;
+}
+[aria-label="Consultation menu"] > div {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+#floating-inquiry-menu-mobile {
+  width: 68px;
+}
