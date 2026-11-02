@@ -57,6 +57,20 @@ function mount(){
  host.innerHTML=shell();bind();apply();return true;
 }
 function boot(){var ok=mount();if(!ok)setTimeout(boot,500);}
-if(document.readyState==='complete'){setTimeout(boot,1200);}else{window.addEventListener('load',function(){setTimeout(boot,1200);});}
+function stableMount(){
+ var last=Date.now();
+ var mo=new MutationObserver(function(){last=Date.now();});
+ mo.observe(document.body,{childList:true,subtree:true,characterData:true});
+ var t=setInterval(function(){
+  if(Date.now()-last>1600){clearInterval(t);mo.disconnect();boot();setTimeout(check,1500);}
+ },400);
+}
+function check(){
+ var b=document.getElementById('fsqBody');if(!b||!b.parentElement)return;
+ if(b.querySelector('tr[data-fix], tr[class*="border-idh"], tr[class*="transition-colors"]')){
+  var p=b.closest('.fsq-host');if(p&&p.parentElement)p.parentElement.removeChild(p);host=null;boot();
+ }
+}
+if(document.readyState==='complete'){setTimeout(stableMount,600);}else{window.addEventListener('load',function(){setTimeout(stableMount,600);});}
 })();
 </script></body></html>
