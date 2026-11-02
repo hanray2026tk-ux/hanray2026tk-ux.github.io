@@ -48,8 +48,7 @@ function shell(){return '<style>'
 function bind(){var bs=document.querySelectorAll('#fsqTabs .fsq-tab');for(var i=0;i<bs.length;i++){bs[i].onclick=(function(b){return function(){cat=b.getAttribute('data-cat');apply();};})(bs[i]);}}
 function mount(){
  var tl=document.querySelector('[role="tablist"]');if(!tl)return false;
- var root=tl,r=0;while(root&&r<6&&root.querySelector('table')===null){root=root.parentElement;r++;}
- if(!root||root===document.body)root=tl.closest('[data-orientation]')||tl.parentElement;if(!root)return false;
+ var root=tl.closest('[data-orientation]')||tl.parentElement;if(!root)return false;
  root.style.display='none';
  if(host&&host.parentElement)return true;
  host=document.createElement('div');host.className='fsq-host';host.setAttribute('data-fsq-board','1');
