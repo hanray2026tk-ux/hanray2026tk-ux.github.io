@@ -54,7 +54,15 @@ function mount(){
  if(host&&host.parentElement)return true;
  host=document.createElement('div');host.className='fsq-host';host.setAttribute('data-fsq-board','1');
  root.parentElement.insertBefore(host,root);
- host.innerHTML=shell();bind();apply();return true;
+ host.innerHTML=shell();bind();apply();
+ setTimeout(verify,1500);return true;
+}
+function verify(){
+ var b=document.getElementById('fsqBody');if(!b||!b.parentElement)return;
+ if(b.querySelector('tr[data-fix], tr[class*="border-idh"]')){
+  var p=b.closest('.fsq-host');if(p&&p.parentElement)p.parentElement.removeChild(p);
+  host=null;setTimeout(mount,400);
+ }
 }
 function ensure(){
  var tl=document.querySelector('[role="tablist"]');if(tl&&tl.style.display!=='none')tl.style.display='none';
