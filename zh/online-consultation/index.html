@@ -62,11 +62,14 @@ function stableMount(){
  var mo=new MutationObserver(function(){last=Date.now();});
  mo.observe(document.body,{childList:true,subtree:true,characterData:true});
  var t=setInterval(function(){
-  if(Date.now()-last>1600){clearInterval(t);mo.disconnect();boot();setTimeout(check,1500);}
+  if(Date.now()-last>1600){
+   clearInterval(t);mo.disconnect();boot();
+   var n=0,iv=setInterval(function(){check();if(++n>12)clearInterval(iv);},1000);
+  }
  },400);
 }
 function check(){
- var b=document.getElementById('fsqBody');if(!b||!b.parentElement)return;
+ var b=document.getElementById('fsqBody');if(!b||!b.parentElement){host=null;boot();return;}
  if(b.querySelector('tr[data-fix], tr[class*="border-idh"], tr[class*="transition-colors"]')){
   var p=b.closest('.fsq-host');if(p&&p.parentElement)p.parentElement.removeChild(p);host=null;boot();
  }
