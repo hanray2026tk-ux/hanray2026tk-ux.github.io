@@ -257,4 +257,4 @@ $RC=function(a,b){if(b=document.getElementById(b))(a=document.getElementById(a))
   }, true);
   document.addEventListener('keydown', function(e){ if(e.key==='Escape'&&!M.hidden) close(); });
 })();
-</script></body></html>
+</script><script id="fs-order-fix">(function(){function move(){var f=document.querySelector("footer");if(!f||!f.parentNode)return;var p=f.parentNode;var kids=[].slice.call(p.children);var i=kids.indexOf(f);if(i<0)return;var after=kids.slice(i+1).filter(function(n){return n.tagName==="SECTION"});for(var k=0;k<after.length;k++){p.insertBefore(after[k],f)}}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",move)}else{move()}window.addEventListener("load",move);setTimeout(move,500);setTimeout(move,1200);setTimeout(move,2500)})();</script></body></html>
