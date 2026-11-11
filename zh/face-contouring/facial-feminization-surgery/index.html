@@ -265,11 +265,13 @@ var A="../../../media/before-after/2026/10/25/1ea87b36541d893935a71dd80796afe4.w
 var LB=zh?"术前":"Before", LA=zh?"术后":"After";
 function mk(src,alt,label){
   var w=document.createElement("div");
-  w.className="relative overflow-hidden";w.style.aspectRatio="3 / 4";w.style.borderRadius="14px";w.style.background="#f3f1ec";
+  w.className="relative overflow-hidden";w.style.position="relative";w.style.aspectRatio="3 / 4";w.style.borderRadius="14px";w.style.background="#f3f1ec";
   var im=document.createElement("img");
   im.src=src;im.alt=alt;im.loading="eager";im.style.width="100%";im.style.height="100%";im.style.objectFit="cover";im.style.display="block";
   var sp=document.createElement("span");
-  sp.className="absolute left-2 bottom-2 md:left-3 md:bottom-3 rounded-full bg-black/55 text-white text-[11px] md:text-xs px-2.5 py-1";
+  sp.className="fs-ffs-ba-tag";sp.style.position="absolute";sp.style.left="10px";sp.style.bottom="10px";
+  sp.style.background="rgba(0,0,0,0.55)";sp.style.color="#fff";sp.style.fontSize="12px";sp.style.lineHeight="1.4";
+  sp.style.padding="5px 10px";sp.style.borderRadius="999px";sp.style.zIndex="2";
   sp.textContent=label;w.appendChild(im);w.appendChild(sp);return w;
 }
 function apply(){
