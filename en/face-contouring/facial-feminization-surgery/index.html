@@ -257,4 +257,37 @@ $RC=function(a,b){if(b=document.getElementById(b))(a=document.getElementById(a))
   }, true);
   document.addEventListener('keydown', function(e){ if(e.key==='Escape'&&!M.hidden) close(); });
 })();
-</script><script id="fs-order-fix">(function(){function move(){var f=document.querySelector("footer");if(!f||!f.parentNode)return;var p=f.parentNode;var kids=[].slice.call(p.children);var i=kids.indexOf(f);if(i<0)return;var after=kids.slice(i+1).filter(function(n){return n.tagName==="SECTION"});for(var k=0;k<after.length;k++){p.insertBefore(after[k],f)}}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",move)}else{move()}window.addEventListener("load",move);setTimeout(move,500);setTimeout(move,1200);setTimeout(move,2500)})();</script></body></html>
+</script><script id="fs-order-fix">(function(){function move(){var f=document.querySelector("footer");if(!f||!f.parentNode)return;var p=f.parentNode;var kids=[].slice.call(p.children);var i=kids.indexOf(f);if(i<0)return;var after=kids.slice(i+1).filter(function(n){return n.tagName==="SECTION"});for(var k=0;k<after.length;k++){p.insertBefore(after[k],f)}}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",move)}else{move()}window.addEventListener("load",move);setTimeout(move,500);setTimeout(move,1200);setTimeout(move,2500)})();</script><script id="fs-ffs-ba-js">(function(){
+var zh=(document.documentElement.lang||"").indexOf("zh")===0;
+var T=zh?"普通面部轮廓":"general facial contouring";
+var B="../../../media/before-after/2026/10/25/9939948b1a050e2f07cca7c26c0e48df.webp";
+var A="../../../media/before-after/2026/10/25/1ea87b36541d893935a71dd80796afe4.webp";
+var LB=zh?"术前":"Before", LA=zh?"术后":"After";
+function mk(src,alt,label){
+  var w=document.createElement("div");
+  w.className="relative overflow-hidden";w.style.aspectRatio="3 / 4";w.style.borderRadius="14px";w.style.background="#f3f1ec";
+  var im=document.createElement("img");
+  im.src=src;im.alt=alt;im.loading="eager";im.style.width="100%";im.style.height="100%";im.style.objectFit="cover";im.style.display="block";
+  var sp=document.createElement("span");
+  sp.className="absolute left-2 bottom-2 md:left-3 md:bottom-3 rounded-full bg-black/55 text-white text-[11px] md:text-xs px-2.5 py-1";
+  sp.textContent=label;w.appendChild(im);w.appendChild(sp);return w;
+}
+function apply(){
+  var ss=document.querySelectorAll("strong"),card=null;
+  for(var i=0;i<ss.length;i++){if(ss[i].textContent.indexOf(T)>-1){card=ss[i].closest("div");break;}}
+  if(!card)return;
+  var row=card.querySelector(".items-center.justify-between"); if(!row)return;
+  var doc=row.lastElementChild;
+  if(doc&&!doc.classList.contains("fs-ffs-ba"))doc.style.display="none";
+  row.style.flexDirection="column";row.style.alignItems="stretch";row.style.gap="20px";
+  if(row.firstElementChild)row.firstElementChild.style.width="100%";
+  var ar=row.querySelectorAll(".w-0.h-0");for(var k=0;k<ar.length;k++)ar[k].style.display="none";
+  if(row.querySelector(".fs-ffs-ba"))return;
+  var g=document.createElement("div");
+  g.className="fs-ffs-ba grid grid-cols-2 gap-2 md:gap-4 w-full max-w-[560px] mx-auto";
+  g.appendChild(mk(B,zh?"凡是与美 - 面部轮廓术前面像":"Fanshi - before",LB));
+  g.appendChild(mk(A,zh?"凡是与美 - 面部轮廓术后面像":"Fanshi - after",LA));
+  row.insertBefore(g,row.firstElementChild);
+}
+var n=0,t=setInterval(function(){apply();if(++n>40)clearInterval(t);},500);
+})();</script></body></html>
