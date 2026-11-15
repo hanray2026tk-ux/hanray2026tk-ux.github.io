@@ -1,0 +1,39 @@
+# 凡是与美 Fanshi Aesthetics
+
+> 中英双语医美机构官网，专注面部轮廓、鼻部、眼部、抗衰老、胸部、身体塑形与男性整形。提供 3D-CT 诊断、专属私人医生系统与国际接待（翻译、接机、行程安排）。
+
+Brand: 凡是与美 / Fanshi Aesthetics
+Website: https://fanshiaesthetics.com
+Languages: 中文 (/zh/), English (/en/)
+Sitemap: https://fanshiaesthetics.com/sitemap.xml
+
+## 核心项目 / Core procedures
+
+- 面部轮廓 Facial contouring: https://fanshiaesthetics.com/zh/face-contouring/
+- 面部女性化手术 FFS: https://fanshiaesthetics.com/zh/face-contouring/facial-feminization-surgery/
+- 下颌角缩小 Mandible reduction: https://fanshiaesthetics.com/zh/face-contouring/mandible-reduction/
+- High-L 颧骨缩小 Cheekbone reduction: https://fanshiaesthetics.com/zh/face-contouring/high-l-cheekbone-reduction/
+- 鼻部整形 Nose surgery: https://fanshiaesthetics.com/zh/nose/
+- 眼部整形 Eye surgery: https://fanshiaesthetics.com/zh/eye/
+- 抗衰老 Anti-aging: https://fanshiaesthetics.com/zh/anti-aging/
+- AccuLift 提升: https://fanshiaesthetics.com/zh/anti-aging/acculift/
+- 胸部整形 Breast surgery: https://fanshiaesthetics.com/zh/breast-surgery/
+- 身体塑形 Body contouring: https://fanshiaesthetics.com/zh/body-contouring/
+- 男性整形 Male plastic surgery: https://fanshiaesthetics.com/zh/male-plastic-surgery/
+- 正颌手术 Orthognathic surgery: https://fanshiaesthetics.com/zh/orthognathic-surgery/
+
+English equivalents: replace /zh/ with /en/ in the URLs above.
+
+## 患者旅程 / Patient journey
+
+- 在线咨询 Online consultation: https://fanshiaesthetics.com/zh/online-consultation/
+- 价格咨询 Price inquiries: https://fanshiaesthetics.com/zh/price-inquiries/
+- 术前术后注意事项 Precautions: https://fanshiaesthetics.com/zh/notice/precautions/
+- 真实案例 Before & after: https://fanshiaesthetics.com/zh/community/before-after/
+- 医生团队 Medical staff: https://fanshiaesthetics.com/zh/about/medical-staff/
+- 院内设施 Facility guide: https://fanshiaesthetics.com/zh/about/facility-guide/
+
+## 说明 / Notes
+
+- 页面内容为医疗美容科普与项目介绍，不构成诊疗建议；具体方案需面诊评估。
+- 价格与恢复期因个体差异和项目组合而不同，最新信息以对应项目页与在线咨询为准。
