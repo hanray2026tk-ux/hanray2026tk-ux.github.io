@@ -24,6 +24,46 @@
     {label:"男性整形手术", value:"male-plastic-surgery"}
   ];
 
+  var SURG1_EN = [
+    {label:"Plastic Surgery (surgical procedures)", value:"plastic-surgery"},
+    {label:"Facial Contouring (facial bone / contour)", value:"facial-contouring"},
+    {label:"Dental / Oral Aesthetics (teeth-related)", value:"dental"},
+    {label:"Minimally Invasive (injections, small incisions)", value:"petit"},
+    {label:"Dermatology / Skin Care (laser, skin treatments)", value:"dermatology"}
+  ];
+  var SURG2_EN = [
+    {label:"Facial Contouring", value:"facial-contouring"},
+    {label:"Nose", value:"nose"},
+    {label:"Orthognathic Surgery", value:"orthognathic-surgery"},
+    {label:"Eyes", value:"eye"},
+    {label:"Middle-Age Eyes", value:"middle-age-eye"},
+    {label:"Anti-Aging", value:"lifting"},
+    {label:"Breast Surgery", value:"breast-surgery"},
+    {label:"Body Contouring", value:"body-contouring"},
+    {label:"Male Plastic Surgery", value:"male-plastic-surgery"}
+  ];
+
+  var IS_EN = /^\/en(\/|$)/.test(location.pathname) || /^en/i.test(document.documentElement.lang || '');
+  var T = IS_EN ? {
+    select: 'Select',
+    submitting: 'Submitting...',
+    submit: 'Submit',
+    photos: 'photos',
+    age: 'Age',
+    errName: 'Please enter your name',
+    errNationality: 'Please select your nationality',
+    errAgree: 'Please agree to the collection and use of personal information'
+  } : {
+    select: '选择',
+    submitting: '提交中...',
+    submit: '立即提交',
+    photos: '能否提供您的照片',
+    age: '年龄',
+    errName: '请输入姓名（Name）',
+    errNationality: '请选择国籍（Nationality）',
+    errAgree: '请勾选「同意收集和使用个人信息」'
+  };
+
   var css = ''
     + '.rfs-wrap{position:relative}'
     + '.rfs-panel{position:absolute;left:0;right:0;top:100%;margin-top:4px;z-index:80;background:#fff;border:1px solid #ececec;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.12);max-height:300px;overflow:auto}'
@@ -184,7 +224,7 @@
   /* ---------- 手术目录 ---------- */
   (function(){
     var label = null, labels = document.querySelectorAll('[data-slot="field-label"]');
-    for(var i=0;i<labels.length;i++){ if(labels[i].textContent.trim()==='手术项目'||labels[i].textContent.trim()==='手术目录'){ label = labels[i]; break; } }
+    for(var i=0;i<labels.length;i++){ var lt = labels[i].textContent.trim(); if(lt==='手术项目'||lt==='手术目录'||lt==='Procedure'||lt==='Surgery'||lt==='Surgery Category'){ label = labels[i]; break; } }
     if(!label) return;
     var field = label.closest('[data-slot="field"]'); if(!field) return;
     var btns = field.querySelectorAll('button'); if(btns.length < 2) return;
@@ -233,18 +273,18 @@
       e.preventDefault(); e.stopPropagation();
       if(!panel.classList.contains('fx-hidden') && panel.getAttribute('data-for')==='1'){ closePanel(); return; }
       panel.setAttribute('data-for','1');
-      openPanel(SURG1, '0', 'calc(50% - 6px)', function(v){
+      openPanel(IS_EN ? SURG1_EN : SURG1, '0', 'calc(50% - 6px)', function(v){
         if(v.value==='plastic-surgery'){ cat='plastic-surgery'; setBtnLabel(btn1, v.label); }
-        else { addChip(v); cat=''; setBtnLabel(btn1,'选择'); }
+        else { addChip(v); cat=''; setBtnLabel(btn1, T.select); }
       });
     });
     btn2.addEventListener('click', function(e){
       e.preventDefault(); e.stopPropagation();
       if(!panel.classList.contains('fx-hidden') && panel.getAttribute('data-for')==='2'){ closePanel(); return; }
       panel.setAttribute('data-for','2');
-      openPanel(SURG2, '50%', 'calc(50% - 6px)', function(v){
+      openPanel(IS_EN ? SURG2_EN : SURG2, '50%', 'calc(50% - 6px)', function(v){
         addChip(v);
-        cat=''; setBtnLabel(btn1,'选择');
+        cat=''; setBtnLabel(btn1, T.select);
       });
     });
     document.addEventListener('click', function(){ closePanel(); });
@@ -281,7 +321,7 @@
   /* ---------- 立即提交 ---------- */
   (function(){
     var submitBtn = null, all = document.querySelectorAll('button');
-    for(var i=0;i<all.length;i++){ if(all[i].textContent.trim()==='立即提交'){ submitBtn = all[i]; break; } }
+    for(var i=0;i<all.length;i++){ if(all[i].textContent.trim()===T.submit){ submitBtn = all[i]; break; } }
     if(!submitBtn) return;
     var rfsBtn = document.getElementById('rfs-btn');
     var cb = document.querySelector('[role="checkbox"]');
@@ -289,7 +329,7 @@
     function fieldByLabel(text){
       var labels = document.querySelectorAll('[data-slot="field-label"]');
       for(var i=0;i<labels.length;i++){
-        if(labels[i].textContent.trim().indexOf(text)===0) return labels[i].closest('[data-slot="field"]');
+        if(labels[i].textContent.trim().indexOf(text)!==-1) return labels[i].closest('[data-slot="field"]');
       }
       return null;
     }
@@ -316,8 +356,8 @@
         messenger_id: (midEl && midEl.value.trim()) || '',
         phone: (phoneEl && phoneEl.value.trim()) || '',
         email: (emailEl && emailEl.value.trim()) || '',
-        picture_status: radioVal(fieldByLabel('能否提供您的照片')) || '',
-        age_range: radioVal(fieldByLabel('年龄')) || '',
+        picture_status: radioVal(fieldByLabel(T.photos)) || '',
+        age_range: radioVal(fieldByLabel(T.age)) || '',
         surgery_codes: chips ? (chips.getAttribute('data-codes') || '') : '',
         message: msgEl ? msgEl.value.trim() : ''
       };
@@ -342,22 +382,22 @@
     function setBusy(on){
       submitBtn.disabled = !!on;
       submitBtn.style.opacity = on ? '.6' : '';
-      submitBtn.textContent = on ? '提交中...' : '立即提交';
+      submitBtn.textContent = on ? T.submitting : T.submit;
     }
 
     submitBtn.addEventListener('click', function(e){
       e.preventDefault();
       var d = collect();
       var errs = [];
-      if(!d.name) errs.push('请输入姓名（Name）');
-      if(!d.nationality_code) errs.push('请选择国籍（Nationality）');
-      if(!cb || cb.getAttribute('aria-checked') !== 'true') errs.push('请勾选「同意收集和使用个人信息」');
+      if(!d.name) errs.push(T.errName);
+      if(!d.nationality_code) errs.push(T.errNationality);
+      if(!cb || cb.getAttribute('aria-checked') !== 'true') errs.push(T.errAgree);
       if(errs.length){
         showModal('Please check your input', errs.join('<br>'), 'OK');
         return;
       }
       if(!WEB3FORMS_KEY){
-        showModal('提示', '本站为静态站点，尚未接入表单提交后台，您的咨询还没有真正发送出去。', '确定');
+        showModal(IS_EN ? 'Notice' : '提示', IS_EN ? 'This site is static and the form backend is not connected yet, so your inquiry was not actually sent.' : '本站为静态站点，尚未接入表单提交后台，您的咨询还没有真正发送出去。', IS_EN ? 'OK' : '确定');
         return;
       }
       /* hCaptcha 垃圾防护：后台开启后，必须把验证令牌一并提交 */
@@ -366,7 +406,7 @@
       if(captchaEl && window.hcaptcha && window.hcaptcha.getResponse){
         captchaToken = window.hcaptcha.getResponse() || '';
         if(!captchaToken){
-          showModal('请完成人机验证', '请先完成下方的「人机验证 / I\'m not a robot」，然后再点击提交。', 'OK');
+          showModal(IS_EN ? 'Verification required' : '请完成人机验证', IS_EN ? 'Please complete the human verification below, then click Submit again.' : '请先完成下方的「人机验证 / I\'m not a robot」，然后再点击提交。', 'OK');
           return;
         }
       }
@@ -396,13 +436,13 @@
       }).then(function(r){ return r.json(); }).then(function(res){
         setBusy(false);
         if(res && res.success){
-          showModal('提交成功', '您的咨询已发送成功，我们会尽快与您联系。<br>Your inquiry has been successfully submitted.', '确定');
+          showModal(IS_EN ? 'Submitted' : '提交成功', IS_EN ? 'Your inquiry has been successfully submitted. We will contact you soon.' : '您的咨询已发送成功，我们会尽快与您联系。<br>Your inquiry has been successfully submitted.', IS_EN ? 'OK' : '确定');
         } else {
-          showModal('提交失败', (res && res.message) ? res.message : '抱歉，提交失败，请稍后再试。', 'OK');
+          showModal(IS_EN ? 'Submission failed' : '提交失败', (res && res.message) ? res.message : (IS_EN ? 'Sorry, submission failed. Please try again later.' : '抱歉，提交失败，请稍后再试。'), 'OK');
         }
       }).catch(function(){
         setBusy(false);
-        showModal('提交失败', '网络异常，请检查网络后重试。', 'OK');
+        showModal(IS_EN ? 'Submission failed' : '提交失败', IS_EN ? 'Network error. Please check your connection and try again.' : '网络异常，请检查网络后重试。', 'OK');
       });
     });
   })();
