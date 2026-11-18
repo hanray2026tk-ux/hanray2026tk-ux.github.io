@@ -16,11 +16,14 @@
     + '#fs-mnav-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:6px 0 40px}'
     + '#fs-mnav-body .fs-row{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #f2f2f2;color:#333;text-decoration:none;font-size:15px;font-weight:600}'
     + '#fs-mnav-body .fs-row:active{background:#fafafa}'
+    + '#fs-mnav-body .fs-row-wrap{display:flex;align-items:stretch;border-bottom:1px solid #f2f2f2}'
+    + '#fs-mnav-body .fs-row-wrap .fs-row{flex:1;border-bottom:0;justify-content:flex-start}'
+    + '#fs-mnav-body .fs-caret{width:52px;min-height:48px;display:flex;align-items:center;justify-content:center;border:0;background:none;color:#aaa;font-size:12px;line-height:1;cursor:pointer;transition:transform .2s ease;-webkit-tap-highlight-color:transparent}'
+    + '#fs-mnav-body .fs-caret.fs-open{transform:rotate(90deg)}'
     + '#fs-mnav-body .fs-sub{display:none;background:#fafafa}'
     + '#fs-mnav-body .fs-sub.fs-open{display:block}'
-    + '#fs-mnav-body .fs-sub a{display:block;padding:12px 16px 12px 30px;color:#555;text-decoration:none;font-size:14px;border-bottom:1px solid #f0f0f0}'
-    + '#fs-mnav-body .fs-arrow{font-size:12px;color:#aaa;transition:transform .2s}'
-    + '#fs-mnav-body .fs-open-row .fs-arrow{transform:rotate(90deg)}'
+    + '#fs-mnav-body .fs-sub a{display:block;padding:13px 16px 13px 30px;color:#555;text-decoration:none;font-size:14px;border-bottom:1px solid #f0f0f0}'
+    + '#fs-mnav-body .fs-sub a:active{background:#f2f2f2}'
     + 'body.fs-mnav-lock{overflow:hidden}';
 
   function build() {
@@ -49,8 +52,10 @@
       var panelEl = it.querySelector('.fs-subnav-panel');
       var subLinks = panelEl ? [].slice.call(panelEl.querySelectorAll('a[role="menuitem"]')) : [];
       if (subLinks.length) {
-        html += '<div class="fs-grp"><div class="fs-row fs-open-row">' + parent.textContent.trim()
-          + '<span class="fs-arrow">&#9654;</span></div><div class="fs-sub">';
+        html += '<div class="fs-grp"><div class="fs-row-wrap">'
+          + '<a class="fs-row" href="' + (parent.getAttribute('href') || '#') + '">' + parent.textContent.trim() + '</a>'
+          + '<button type="button" class="fs-caret" aria-expanded="false" aria-label="展开子菜单">&#9654;</button>'
+          + '</div><div class="fs-sub">';
         subLinks.forEach(function (a) {
           html += '<a href="' + a.getAttribute('href') + '">' + a.textContent.trim() + '</a>';
         });
@@ -70,11 +75,14 @@
     style.textContent = CSS;
     document.head.appendChild(style);
 
-    [].slice.call(panel.querySelectorAll('.fs-open-row')).forEach(function (row) {
-      row.addEventListener('click', function (e) {
+    [].slice.call(panel.querySelectorAll('.fs-caret')).forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
         e.preventDefault();
-        row.parentElement.querySelector('.fs-sub').classList.toggle('fs-open');
-        row.classList.toggle('fs-open-row');
+        e.stopPropagation();
+        var sub = btn.closest('.fs-grp').querySelector('.fs-sub');
+        var on = sub.classList.toggle('fs-open');
+        btn.classList.toggle('fs-open', on);
+        btn.setAttribute('aria-expanded', on ? 'true' : 'false');
       });
     });
 
@@ -103,7 +111,7 @@
     document.getElementById('fs-mnav-close').addEventListener('click', close);
     panel.addEventListener('click', function (e) {
       var a = e.target.closest ? e.target.closest('a') : null;
-      if (a && !a.closest('.fs-open-row')) close();
+      if (a) close();
     });
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') close();
