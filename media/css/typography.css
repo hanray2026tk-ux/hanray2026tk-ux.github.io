@@ -304,3 +304,23 @@ main b {
 #floating-inquiry-menu-mobile {
   width: 68px;
 }
+
+/* ----------
+   浮动「咨询 / 活动」按钮：整体缩小一号
+   移动端 60→52px，桌面端 80→68px
+   ---------- */
+a[aria-label="活动"],
+button[aria-controls^="floating-inquiry-menu"] {
+  width: 52px !important;
+  height: 52px !important;
+  font-size: 13px !important;
+}
+#floating-inquiry-menu-mobile { width: 52px !important; }
+@media (min-width: 768px) {
+  a[aria-label="活动"],
+  button[aria-controls^="floating-inquiry-menu"] {
+    width: 68px !important;
+    height: 68px !important;
+    font-size: 15px !important;
+  }
+}
