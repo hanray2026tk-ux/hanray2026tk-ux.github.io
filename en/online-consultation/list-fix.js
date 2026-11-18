@@ -181,7 +181,7 @@
 
   function ensurePagi() {
     if (pagi.parentNode && document.body.contains(pagi)) return;
-    var write = document.querySelector('a[href="/en/online-consultation/write"]');
+    var write = document.querySelector('a[href$="/online-consultation/write/"], a[href$="/online-consultation/write"]');
     var host = write && write.parentElement ? write.parentElement : null;
     if (host && host.parentElement) host.parentElement.insertBefore(pagi, host);
   }
