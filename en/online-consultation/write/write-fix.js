@@ -43,8 +43,6 @@
     errPassword: 'Please enter a password.',
     errPasswordLen: 'Password must be at least 8 characters.',
     checkTitle: 'Please check your input',
-    captchaTitle: 'Verification required',
-    captchaBody: 'Please complete the human verification (I\'m not a robot) before submitting.',
     noticeTitle: 'Notice',
     noticeBody: 'This site is static and the form backend is not connected, so your message was not actually sent.',
     successTitle: 'Submitted',
@@ -66,8 +64,6 @@
     errPassword: '请输入密码。',
     errPasswordLen: '密码至少需要 8 个字符。',
     checkTitle: '请检查填写内容',
-    captchaTitle: '需要人机验证',
-    captchaBody: '提交前请先完成人机验证（勾选"我不是机器人"）。',
     noticeTitle: '提示',
     noticeBody: '当前为静态站点，表单后端尚未连接，您的留言未实际发送。',
     successTitle: '提交成功',
@@ -260,14 +256,6 @@
         return;
       }
 
-      /* hCaptcha 垃圾防护：后台开启后必须携带验证令牌 */
-      var captchaEl = $('.h-captcha[data-captcha="true"]');
-      var captchaToken = '';
-      if (captchaEl && window.hcaptcha && window.hcaptcha.getResponse) {
-        captchaToken = window.hcaptcha.getResponse() || '';
-        if (!captchaToken) { showModal(T.captchaTitle, T.captchaBody, T.ok); return; }
-      }
-
       setBusy(true);
       var fd = new FormData();
       fd.append('access_key', WEB3FORMS_KEY);
@@ -278,7 +266,6 @@
       fd.append('title', title);
       fd.append('message', msg);
       fd.append('is_private', isPrivate ? 'true' : 'false');
-      if (captchaToken) fd.append('h-captcha-response', captchaToken);
 
       fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { 'Accept': 'application/json' }, body: fd })
         .then(function (r) { return r.json(); })

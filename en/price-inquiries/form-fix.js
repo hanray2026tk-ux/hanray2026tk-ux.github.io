@@ -322,6 +322,16 @@
   (function(){
     var submitBtn = null, all = document.querySelectorAll('button');
     for(var i=0;i<all.length;i++){ if(all[i].textContent.trim()===T.submit){ submitBtn = all[i]; break; } }
+
+    /* 蜜罐字段：真人看不见，机器人乱填即丢弃 */
+    var hp = document.createElement('input');
+    hp.type = 'text';
+    hp.name = 'botcheck';
+    hp.tabIndex = -1;
+    hp.setAttribute('autocomplete', 'off');
+    hp.setAttribute('aria-hidden', 'true');
+    hp.style.cssText = 'position:absolute!important;left:-9999px!important;top:auto!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important';
+    if(submitBtn && submitBtn.parentElement) submitBtn.parentElement.appendChild(hp);
     if(!submitBtn) return;
     var rfsBtn = document.getElementById('rfs-btn');
     var cb = document.querySelector('[role="checkbox"]');
@@ -388,6 +398,7 @@
     submitBtn.addEventListener('click', function(e){
       e.preventDefault();
       var d = collect();
+      if(hp && hp.value){ return; }
       var errs = [];
       if(!d.name) errs.push(T.errName);
       if(!d.nationality_code) errs.push(T.errNationality);
@@ -399,16 +410,6 @@
       if(!WEB3FORMS_KEY){
         showModal(IS_EN ? 'Notice' : '提示', IS_EN ? 'This site is static and the form backend is not connected yet, so your inquiry was not actually sent.' : '本站为静态站点，尚未接入表单提交后台，您的咨询还没有真正发送出去。', IS_EN ? 'OK' : '确定');
         return;
-      }
-      /* hCaptcha 垃圾防护：后台开启后，必须把验证令牌一并提交 */
-      var captchaEl = document.querySelector('.h-captcha[data-captcha="true"]');
-      var captchaToken = '';
-      if(captchaEl && window.hcaptcha && window.hcaptcha.getResponse){
-        captchaToken = window.hcaptcha.getResponse() || '';
-        if(!captchaToken){
-          showModal(IS_EN ? 'Verification required' : '请完成人机验证', IS_EN ? 'Please complete the human verification below, then click Submit again.' : '请先完成下方的「人机验证 / I\'m not a robot」，然后再点击提交。', 'OK');
-          return;
-        }
       }
       setBusy(true);
       var payload = {
@@ -428,7 +429,6 @@
         message: d.message,
         privacy_agreed: true
       };
-      if(captchaToken) payload['h-captcha-response'] = captchaToken;
       fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
