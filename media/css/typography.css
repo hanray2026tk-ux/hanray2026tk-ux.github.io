@@ -315,7 +315,7 @@ button[aria-controls^="floating-inquiry-menu"] {
   height: 52px !important;
   font-size: 13px !important;
 }
-#floating-inquiry-menu-mobile { width: 52px !important; }
+#floating-inquiry-menu-mobile { width: 72px !important; padding-left: 4px !important; padding-right: 4px !important; }
 @media (min-width: 768px) {
   a[aria-label="活动"],
   button[aria-controls^="floating-inquiry-menu"] {

@@ -121,6 +121,34 @@
     });
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build);
-  else build();
+  function initFloatInquiry() {
+    var btn = document.querySelector('button[aria-controls="floating-inquiry-menu-mobile"]');
+    var panel = document.getElementById('floating-inquiry-menu-mobile');
+    if (!btn || !panel || btn.getAttribute('data-fs-bound')) return;
+    btn.setAttribute('data-fs-bound', '1');
+    function setOpen(on) {
+      panel.classList.toggle('hidden', !on);
+      panel.classList.toggle('flex', on);
+      btn.setAttribute('aria-expanded', on ? 'true' : 'false');
+    }
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      setOpen(panel.classList.contains('hidden'));
+    });
+    var close = panel.querySelector('button[aria-label="关闭咨询菜单"],button[aria-label="Close consultation menu"]');
+    if (close) {
+      close.addEventListener('click', function (e) {
+        e.preventDefault();
+        setOpen(false);
+      });
+    }
+  }
+
+  function init() {
+    build();
+    initFloatInquiry();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
