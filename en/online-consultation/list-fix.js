@@ -181,9 +181,12 @@
 
   function ensurePagi() {
     if (pagi.parentNode && document.body.contains(pagi)) return;
-    var write = document.querySelector('a[href$="/online-consultation/write/"], a[href$="/online-consultation/write"]');
-    var host = write && write.parentElement ? write.parentElement : null;
-    if (host && host.parentElement) host.parentElement.insertBefore(pagi, host);
+    /* 挂在列表容器（桌面表格 + 移动端卡片）之后，不依赖页面是否存在 write 链接 */
+    var table = document.querySelector('table');
+    var host = table ? table.closest('div[class*="mt-[24px]"]') : null;
+    if (!host && mobileWrap && mobileWrap.parentElement) host = mobileWrap.parentElement;
+    if (!host && table && table.parentElement) host = table.parentElement;
+    if (host) host.appendChild(pagi);
   }
 
   var ARROW = {
